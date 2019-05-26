@@ -9,10 +9,18 @@ if (isset($_POST['product-submit'])) {
     $barcode = $_POST['barcode'];
     $image =$_POST['image'];
 
+   // $target="images/".basename($_FILES['image']['name']);
+  //  $imageFileType = strtolower(pathinfo($target,PATHINFO_EXTENSION));
     //Add product
     $query = "INSERT INTO product(name,category,price,barcode,image_url) VALUES (?,?,?,?,?)";
     $stmt = $conn->prepare($query);
 
+   /* if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+         echo "DODADENA SLIKA VO PODATOCNATA BAZA";
+    } else {
+        echo "SlIKATA NE E DODADENA";
+    }
+*/
     $stmt->execute([$productName,$category,$price,$barcode,$image]);
     $productId = $conn->lastInsertId();
 }
@@ -32,6 +40,6 @@ if (isset($_POST['product-submit'])) {
     <input type="number" name="barcode">
     </br>
     <label>Image URL</label>
-    <input name="image">
+    <input type="file" name="image" id="image" >
     <input type="submit" name="product-submit">
 </form>
