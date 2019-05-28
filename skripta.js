@@ -2,6 +2,19 @@ $(document).ready(function() {
     $("#login").click(function (e) {
         $("#loginModal").show();
     });
+
+    $('li.nav-item.dropdown').hover(
+        function() {
+            $(this).attr("aria-expanded", "true");
+            $('li.nav-item.dropdown').addClass('show');
+            $('div.dropdown-menu').addClass('show');
+        },
+        function () {
+            $(this).attr("aria-expanded", "false");
+            $('li.nav-item.dropdown').removeClass('show');
+            $('div.dropdown-menu').removeClass('show');
+        }
+    );
 });
 
 function highlightStar(obj) {
@@ -39,5 +52,4 @@ function resetRating() {
         });
     }
 }
-
 

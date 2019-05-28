@@ -6,50 +6,57 @@ session_start();
     <meta charset="UTF-8">
     <meta name="description" content="This is example">
     <meta name=viewport content="width=device-width" inital-scale="1">
-    <link rel="stylesheet" type="text/css" href="style.css"/>
+
+    <!-- BOOTSTRAP -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-            crossorigin="anonymous"></script>
-    <script
-            src="https://code.jquery.com/jquery-3.3.1.min.js"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous"></script>
-    <script src="skripta.js"></script>
-    <script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+    <!-- END BOOTSTRAP -->
 
-    <title></title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+
+    <title>Primerjalnik Cen</title>
 </head>
 
-<body class="container">
+<body class="container-fluid">
 <header>
-    <nav>
-        <ul>
-            <li><a href="index.php">Home</a></li>
+    <nav class="row navbar navbar-dark bg-dark">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+            <!-- If user is logged in -->
             <?php if (isset($_SESSION['id'])) { ?>
+                <!-- If user is admin -->
                 <?php if(isset($_SESSION['isadmin']) && $_SESSION['isadmin']) { ?>
-                    <li><a href="add_product.php">Add product</a></li>
                 <?php } ?>
-                <li><a href="products.php">Products</a></li>
-                <li>
-                    <form action="logout.inc.php" method="post">
-                        <button type="submit" name="logout-submit">Logout</button>
+                <!-- END -->
+                <li class="nav-item"><a class="nav-link" href="add_product.php">Add product</a></li>
+            <?php } ?>
+            <!-- END -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="products.php" role="button"
+                   aria-haspopup="true" aria-expanded="false">Products</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="product_category.php?category=Milk">Milk</a>
+                    <a class="dropdown-item" href="product_category.php?category=Bread">Bread</a>
+                    <a class="dropdown-item" href="product_category.php?category=Chocolate">Chocolate</a>
+                    <a class="dropdown-item" href="product_category.php?category=Vegetables">Vegetables</a>
+                    <a class="dropdown-item" href="product_category.php?category=Fruit">Fruit</a>
+                </div>
+            </li>
+        </ul>
+
+        <ul class="nav justify-content-end">
+            <?php if (isset($_SESSION['id'])) { ?>
+                <li class="nav-item">
+                    <form class="nav-link" action="logout.inc.php" method="post">
+                        <button class="btn btn-link" type="submit" name="logout-submit">Logout</button>
                     </form>
                 </li>
-                <?php } else { ?>
-                <li><a href="#" id="login">Login</a></li>
-                <li><a href="signup.php">Register</a></li>
+            <?php } else { ?>
+                <li class="nav-item"><a class="nav-link" href="#" id="login">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="signup.php">Register</a></li>
             <?php } ?>
-
-                <ul style="display: block">
-                    <li><a href="product_category.php?category=Milk">Milk</a></li>
-                    <li><a href="product_category.php?category=Bread">Bread</a></li>
-                    <li><a href="product_category.php?category=Chocolate">Chocolate</a></li>
-                    <li><a href="product_category.php?category=Vegetables">Vegetables</a></li>
-                    <li><a href="product_category.php?category=Fruit">Fruit</a></li>
-                </ul>
         </ul>
+
 
         <div id="loginModal" class="modal" tabindex="-1" role="dialog">
             <div class="modal-body">
@@ -62,3 +69,4 @@ session_start();
         </div>
     </nav>
 </header>
+<div class="container">

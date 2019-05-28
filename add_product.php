@@ -2,36 +2,26 @@
 include "header.php";
 require "dbh.inc.php";
 
+$storesQuery = "SELECT * FROM store";
+$stores = $conn->query($storesQuery)->fetchAll();
+
+$categoryQuery = "SELECT * FROM category";
+$categories = $conn->query($categoryQuery)->fetchAll();
+
 if (isset($_POST['product-submit'])) {
     $productName = $_POST['name'];
-    $category = $_POST['category'];
+    $categoryId = $_POST['category'];
     $price = $_POST['price'];
     $barcode = $_POST['barcode'];
-    $image =$_POST['image'];
-    $store=$_POST['store'];
+    $image = $_POST['image'];
+    $storeId = $_POST['store'];
 
-
-    $query = "INSERT INTO product(name,category,price,barcode,image_url) VALUES (?,?,?,?,?)";
-    $stmt = $conn->prepare($query);
-    $stmt->execute([$productName,$category,$price,$barcode,$image]);
+    $insertProduct = $conn->prepare("INSERT INTO product(name,price,barcode,image_url,category_id) VALUES (?,?,?,?,?)");
+    $insertProduct->execute([$productName,$price,$barcode,$image,$categoryId]);
     $productId = $conn->lastInsertId();
 
-    $selectStoreId=$conn->query("Select id from store where name='$store' LIMIT 1");
-    $selectStoreId->execute();
-
-    $selectStoreId->setFetchMode(PDO::FETCH_ASSOC);
-
-    $idStore=null;
-
-    while ($row = $selectStoreId->fetch()) {
-
-    $idStore=$row['id'];
-
-    }
-
-    $insert=$conn->prepare("INSERT INTO  product_store(product_id,store_id) VALUES(?,?)");
-    $insert->execute([$productId,$idStore]);
-
+    $insertStore=$conn->prepare("INSERT INTO  product_store(product_id,store_id) VALUES(?,?)");
+    $insertStore->execute([$productId,$storeId]);
 }
 ?>
 
@@ -41,19 +31,16 @@ if (isset($_POST['product-submit'])) {
     </br>
     <label>Category</label>
     <select name="category" required>
-        <option value="Milk">Mleko</option>
-        <option value="Chocolate">Chocolate</option>
-        <option value="Bread">Bread</option>
-        <option value="Fruit">Fruit</option>
-        <option value="Vegetables">Vegetables</option>
+        <?php foreach ($categories as $category) { ?>
+            <option value="<?php echo $category['id'] ?>" selected><?php echo $category['name'] ?></option>
+        <?php } ?>
     </select>
     </br>
     <label>Store</label>
     <select name="store" required>
-        <option value="Tus">Tus</option>
-        <option value="Spar">Spar</option>
-        <option value="Merkator">Merkator</option>
-        <option value="Hofer">Hofer</option>
+        <?php foreach ($stores as $store) { ?>
+            <option value="<?php echo $store['id'] ?>" selected><?php echo $store['name'] ?></option>
+        <?php } ?>
     </select>
     <label>Price</label>
     <input name="price" type="number" required>
@@ -65,3 +52,5 @@ if (isset($_POST['product-submit'])) {
     <input type="file" name="image" id="image" >
     <input type="submit" name="product-submit">
 </form>
+
+<?php include "footer.php" ?>
