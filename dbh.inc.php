@@ -1,5 +1,5 @@
 <?php
-$connString = "mysql:dbname=praktikum2";
+$connString = "mysql:dbname=praktikum2;host=127.0.0.1;port=3307";
 $dBUsername="root";
 $dBPassword= "";
 $conn = null;
