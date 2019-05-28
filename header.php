@@ -41,6 +41,14 @@ session_start();
                 <li><a href="#" id="login">Login</a></li>
                 <li><a href="signup.php">Register</a></li>
             <?php } ?>
+
+                <ul style="display: block">
+                    <li><a href="product_category.php?category=Milk">Milk</a></li>
+                    <li><a href="product_category.php?category=Bread">Bread</a></li>
+                    <li><a href="product_category.php?category=Chocolate">Chocolate</a></li>
+                    <li><a href="product_category.php?category=Vegetables">Vegetables</a></li>
+                    <li><a href="product_category.php?category=Fruit">Fruit</a></li>
+                </ul>
         </ul>
 
         <div id="loginModal" class="modal" tabindex="-1" role="dialog">
