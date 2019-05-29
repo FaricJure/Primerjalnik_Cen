@@ -1,15 +1,20 @@
-/* global  $, dbr*/
 
 dbr.licenseKey = "t0068MgAAAKkfxtAu2bV67/RLmEJMaFGzhi/pg4ZNxyQOGlsAY/O+xULRG11Gt5a7f7xJpnrxcH6t9+Z1Aj6UttMmU1HFmYI=";
+
+src="https://api.ipify.org?format=json&callback=getIP";
 
 var $video = document.getElementById('PVideo');
 var $cvsContainer = document.getElementById('canvasContainer');
 var $resultContainer = document.getElementById('resultContainer');
 
-function myFunction(x) {
-    var naslov="https://164.8.163.164/praktikum2.2/Primerjalnik_Cen-master/add_product.php?koda="+x;
+var $ipv4= document.getElementById('a123');
+//alert($ipv4.accessKey);
 
-    location.replace(naslov)
+function myFunction(x) {
+
+    var naslov="https://"+$ipv4.accessKey+"/praktikum2.2/Primerjalnik_Cen-master/add_product.php?koda="+x;
+   //var naslov="https://"+"164.8.161.175"+"/praktikum2.2/Primerjalnik_Cen-master/add_product.php?koda="+x;
+    location.replace(naslov);
 }
 
 var videoReader = new dbr.Scanner({
