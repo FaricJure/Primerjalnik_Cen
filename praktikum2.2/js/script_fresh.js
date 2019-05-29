@@ -12,8 +12,8 @@ var $ipv4= document.getElementById('a123');
 
 function myFunction(x) {
 
-    var naslov="https://"+$ipv4.accessKey+"/praktikum2.2/Primerjalnik_Cen-master/add_product.php?koda="+x;
-   //var naslov="https://"+"164.8.161.175"+"/praktikum2.2/Primerjalnik_Cen-master/add_product.php?koda="+x;
+    var naslov="https://"+$ipv4.accessKey+"/praktikum2.2/web/add_product.php?koda="+x;
+  
     location.replace(naslov);
 }
 
