@@ -22,20 +22,21 @@
 
 <?php
 
-//include "header.php";
+include "header.php";
 require "dbh.inc.php";
 
 
-if (isset($_GET['product']) && isset($_GET['id']) && isset($_GET['store'])) {
+
+if (isset($_GET['product'])&&isset($_GET['id'])&&isset($_GET['store'])) {
 
     $productName = $_GET['product'];
-    $productId = $_GET['id'];
-    $storeName = $_GET['store'];
+    $productId=$_GET['id'];
+    $storeName=$_GET['store'];
 
-//  echo $productName;
+    //  echo $productName;
 
     $prodInfo = $conn->query("Select product.barcode as barcode , product.name as productName ,product.price as price
-   from product where product.id='" . $productId . "' ");
+   from product where product.id='" .$productId. "' ");
 
     $prodInfo->execute();
 
@@ -54,10 +55,10 @@ if (isset($_GET['product']) && isset($_GET['id']) && isset($_GET['store'])) {
     $otherStores->setFetchMode(PDO::FETCH_OBJ);
     $stores = [];
 
-    $storesCount = null;
+    $storesCount=null;
     while ($row = $otherStores->fetchObject()) {
         $stores[] = $row;
-        $stores++;
+       $stores++;
     }
 
     foreach ($infoss as $info):
@@ -68,62 +69,24 @@ if (isset($_GET['product']) && isset($_GET['id']) && isset($_GET['store'])) {
         <p>Barcode:<?php echo $info->barcode ?></p>
         <p>Price:<?php echo $info->price ?></p>
 
-    <?php
+<?php
     endforeach;
-//   if($storesCount>0) {
+ //   if($storesCount>0) {
     ?>
     <p>In other stores:
-    <?php
-    foreach ($stores
+   <?php
+       foreach ($stores as $store):
+           ?>
 
-             as $store):
-        ?>
+           <li><a href="product_more_info.php?s=<?php echo $store->storeName ?> "><?php echo $store->storeName ?></a></li>;
 
-    <form action="#" method="post" >
-        <button type="submit" name="s" value="<?php echo $store->storeName ?>" ><?php echo $store->storeName ?></button>
-    </form>
-    <?php
+           <?php
 
-    endforeach;
-//  }
-    ?>
-    </p>
-
-    <?php
-
-    $param = null;
-    if (isset($_POST['s'])) {
-
-        $param = $_POST['s'];
-
-        $product = $conn->query("Select product.name as productName, store.name as storeName, product.price from store 
-        join product_store on store.id=product_store.store_id 
-        join product on product.id=product_store.product_id where product.name='$productName' and store.name='$param'");
-
-        $product->execute();
-
-        $product->setFetchMode(PDO::FETCH_OBJ);
-        $productInfo = [];
-
-        while ($row = $product->fetchObject()) {
-            $productInfo[] = $row;
-
-        }
-
-        foreach ($productInfo as $info):
-
-            ?>
-
-            <p>Izbrana trgovina:<?php echo $info->storeName ?>
-                Cena produkta:<?php echo $info->price ?>
-            </p>
-
-        <?php
-        endforeach;
-
-    } else {
-        echo " ";
-    }
+       endforeach;
+ //  }
+   ?>
+ </p>
+<?php
 } else {
     echo " ";
 }
