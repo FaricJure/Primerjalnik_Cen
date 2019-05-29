@@ -78,15 +78,49 @@ if (isset($_GET['product'])&&isset($_GET['id'])&&isset($_GET['store'])) {
        foreach ($stores as $store):
            ?>
 
-           <li><a href="product_more_info.php?s=<?php echo $store->storeName ?> "><?php echo $store->storeName ?></a></li>;
+
+          <form action="#" method="post">
+            <button type="submit" name="s" value="<?php echo $store->storeName ?>"><?php echo $store->storeName ?></button>
+            </form>
 
            <?php
 
        endforeach;
  //  }
-   ?>
+         if(isset($_POST["s"])){
+
+             $productInStore=$_POST["s"];
+
+             $productInStore=$conn->query("Select product.price as productPrice , store.name as storeName , product.barcode as productBarcode 
+            from  product join product_store on product.id=product_store.product_id 
+            join store on store.id=product_store.store_id  
+            where product.name='$productName' and store.name='$storeName'");
+         }
+
+    $productInStore->execute();
+    $productInStore->setFetchMode(PDO::FETCH_OBJ);
+    $productInfo = [];
+
+    $storesCount=null;
+
+    while ($row = $productInStore->fetchObject()) {
+        $productInfo[] = $row;
+
+    }
+       foreach ($productInfo as $info):
+
+           ?>
  </p>
-<?php
+
+           <p>Izbrana trgovina:<?php echo $info->storeName ?>
+               Cena produkta:<?php echo  $info->productPrice  ?>
+           </p>
+
+
+       <?php
+
+     endforeach;
+
 } else {
     echo " ";
 }
