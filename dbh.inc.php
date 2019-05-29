@@ -1,5 +1,5 @@
 <?php
-$connString = "mysql:dbname=praktikum2";
+$connString = "mysql:dbname=praktikum";
 $dBUsername="root";
 $dBPassword= "";
 $conn = null;
