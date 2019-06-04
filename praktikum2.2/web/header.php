@@ -10,8 +10,42 @@ require 'dbh.inc.php';
 
 $categoryQuery = "SELECT * FROM category";
 $categories = $conn->query($categoryQuery)->fetchAll();
-?>
 
+$selected = 0;
+if (isset($_POST['selected'])) {
+    $selected = $_POST['selected'];
+}
+$searchBar = null;
+if (isset($_POST['searchBar'])) {
+    $searchBar = $_POST['searchBar'];
+}
+
+if (($selected != null) && ($searchBar == null)  ) {
+
+    header("Location:product_category.php?selected=" . $selected);
+
+} else if (($searchBar != null)) {
+
+    $sql = "Select product.id as id , store.name as storeName from product join product_store on product.id=product_store.product_id 
+   join  store on store.id=product_store.store_id where  product.name='$searchBar'";
+
+    $productInfo = $conn->query($sql)->fetchAll();
+
+    foreach ($productInfo as $info):
+
+        $prodId = $info['id'];
+        $storeName = $info['storeName'];
+
+    endforeach;
+
+    header("Location:product.php?id=" . $prodId . "&name=" . $searchBar . "&store=" . $storeName);
+}
+else if (($searchBar == null) || ($selected == null)) {
+    echo " ";
+}
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -56,24 +90,27 @@ $categories = $conn->query($categoryQuery)->fetchAll();
     <!-- TOP HEADER -->
     <div id="top-header">
         <div class="container">
-            <ul class="header-links pull-left">
+            <?php if (isset($_SESSION['id'])) { ?>
+                <ul class="header-links pull-left">
 
-                <li><a href="add_product.php"><i class="fa fa-plus"></i> Add new product</a></li>
-                <li><a href="#"><i class="fa fa-list"></i> Your listed products</a></li>
-            </ul>
-            <ul class="header-links pull-right">
+                    <li><a href="add_product.php"><i class="fa fa-plus"></i> Add new product</a></li>
+                    <li><a href="#"><i class="fa fa-list"></i> Your listed products</a></li>
+                </ul>
+
+                <ul class="header-links pull-right">
                 <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
 
                 <li class="nav-item">
                     <form action="logout.inc.php" method="post">
                 <li><a type="submit" href="logout.inc.php" name="logout-submit">Logout</a></li>
-                    </form>
+                </form>
                 </li>
-
-                <li class="nav-item"><a class="nav-link" href="login.php" id="login"><i class="fa fa-sign-in"></i>Login</a></li>
+            <?php } else { ?>
+                <li class="nav-item"><a class="nav-link" href="login.php" id="login"><i class="fa fa-sign-in"></i>Login</a>
+                </li>
                 <li><a href="signup.php"><i class="fa fa-user-plus"></i>Signup</a></li>
-            </ul>
-
+                </ul>
+            <?php } ?>
         </div>
     </div>
     <!-- /TOP HEADER -->
@@ -98,28 +135,28 @@ $categories = $conn->query($categoryQuery)->fetchAll();
                 <!-- SEARCH BAR -->
                 <div class="col-md-6">
                     <div class="header-search">
-                        <form action="category_products.php" method="post">
+                        <form action=" " method="post">
                             <select name="selected" class="input-select">
                                 <option value="0">All Categories</option>
                                 <?php foreach ($categories as $category): ?>
-                                    <option value="1"><?php echo $category['name'] ?></option>
+                                    <option value="<?php echo $category['name'] ?>"><?php echo $category['name'] ?></option>
                                 <?php endforeach; ?>
                             </select>
-                            <input class="input" placeholder="Search here">
-                            <button type="submit" name="category" class="search-btn">Search</button>
-
+                            <input class="input" name="searchBar" type="text" placeholder="Search here">
+                            <button name="button" class="search-btn">Search</button>
                         </form>
                     </div>
                 </div>
                 <!-- /SEARCH BAR -->
 
+                <!--  Redirect to another page if user click one of categories formv dropdoewn menu -->
 
                 <!-- ACCOUNT -->
                 <div class="col-md-3 clearfix">
                     <div class="header-ctn">
                         <!-- Wishlist -->
                         <div>
-                            <a href="#">
+                            <a href="wishlist.php">
                                 <i class="fa fa-heart-o"></i>
                                 <span>Your Wishlist</span>
                                 <div class="qty">2</div>
@@ -129,7 +166,7 @@ $categories = $conn->query($categoryQuery)->fetchAll();
 
                         <!-- Cart -->
                         <div>
-                            <a href="#">
+                            <a href="barcodeScanner.php">
                                 <i class="fa fa-barcode"></i>
                                 <span>Scan barcode</span>
                             </a>
@@ -166,7 +203,6 @@ $categories = $conn->query($categoryQuery)->fetchAll();
             <ul class="main-nav nav navbar-nav">
                 <li class="active"><a href="index.php">Home</a></li>
                 <li><a href="#">Categories</a></li>
-                <?php "TUKA".$_SESSION['id']; ?>
 
             </ul>
             <!-- /NAV -->

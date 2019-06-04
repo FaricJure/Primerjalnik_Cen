@@ -22,7 +22,6 @@ $productQuery = "Select product.id as productId,product.name as productName ,sto
     group by product.name";
 $products = $conn->query($productQuery)->fetchAll();
 
-$products = $conn->query($productQuery)->fetchAll();
 
 ?>
     <!-- SECTION -->

@@ -19,8 +19,6 @@ $productQuery = "Select product.id as productId,product.name as productName ,sto
 $products = $conn->query($productQuery)->fetchAll();
 ?>
 
-
-
 <!-- SECTION -->
 <div class="section">
     <!-- container -->
@@ -28,22 +26,6 @@ $products = $conn->query($productQuery)->fetchAll();
         <!-- row -->
         <div class="row">
             <h3 class="title">New Products</h3>
-            <!-- section title -->
-           <!-- <div class="col-md-12">
-                <div class="section-title">
-                    <h3 class="title">New Products</h3>
-                    <div class="section-nav">
-                        <ul class="section-tab-nav tab-nav">
-                            <li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li>
-                            <li><a data-toggle="tab" href="#tab1">Smartphones</a></li>
-                            <li><a data-toggle="tab" href="#tab1">Cameras</a></li>
-                            <li><a data-toggle="tab" href="#tab1">Accessories</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- /section title -->
-
             <!-- Products tab & slick -->
             <div class="col-md-12">
                 <div class="row">
@@ -115,7 +97,6 @@ $products = $conn->query($productQuery)->fetchAll();
     </div>
     <!-- /container -->
 </div>
-<!-- /HOT DEAL SECTION -->
 
 <!-- SECTION -->
 <div class="section">
@@ -124,23 +105,7 @@ $products = $conn->query($productQuery)->fetchAll();
         <!-- row -->
         <div class="row">
             <h3 class="title">Top products</h3>
-            <!-- section title -->
-           <!-- <div class="col-md-12">
-                <div class="section-title">
-                    <h3 class="title">Top products</h3>
-                    <div class="section-nav">
-                        <ul class="section-tab-nav tab-nav">
-                            <li class="active"><a data-toggle="tab" href="#tab2">Laptops</a></li>
-                            <li><a data-toggle="tab" href="#tab2">Smartphones</a></li>
-                            <li><a data-toggle="tab" href="#tab2">Cameras</a></li>
-                            <li><a data-toggle="tab" href="#tab2">Accessories</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- /section title -->
 
-            <!-- Products tab & slick -->
             <div class="col-md-12">
                 <div class="row">
                     <div class="products-tabs">
@@ -167,75 +132,6 @@ $products = $conn->query($productQuery)->fetchAll();
 </div>
 <!-- /SECTION -->
 
-<!-- SECTION -->
-<!--<div class="section">
-    <!-- container -->
-    <!--<div class="container">
-        <!-- row -->
-      <!--  <div class="row">
-            <div class="col-md-4 col-xs-6">
-                <div class="section-title">
-                    <h4 class="title">Top products</h4>
-                    <div class="section-nav">
-                        <div id="slick-nav-3" class="products-slick-nav"></div>
-                    </div>
-                </div>
-
-                <div class="products-widget-slick" data-nav="#slick-nav-3">
-                    <div>
-                        <!-- product widgets -->
-                        <?php //foreach ($products as $product): ?>
-                            <?php //include 'product_widget.php' ?>
-                        <?php// endforeach; ?>
-                        <!-- /product widgets -->
-                  <!--  </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-xs-6">
-                <div class="section-title">
-                    <h4 class="title">Top products</h4>
-                    <div class="section-nav">
-                        <div id="slick-nav-4" class="products-slick-nav"></div>
-                    </div>
-                </div>
-
-                <div class="products-widget-slick" data-nav="#slick-nav-4">
-                    <div>
-                        <!-- product widgets -->
-                        <?php //foreach ($products as $product): ?>
-                            <?php //include 'product_widget.php' ?>
-                        <?php //endforeach; ?>
-                        <!-- /product widgets -->
-                    <!--</div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-xs-6">
-                <div class="section-title">
-                    <h4 class="title">Top products</h4>
-                    <div class="section-nav">
-                        <div id="slick-nav-5" class="products-slick-nav"></div>
-                    </div>
-                </div>
-
-                <div class="products-widget-slick" data-nav="#slick-nav-5">
-                    <div>
-                        <!-- product widgets -->
-                        <?php //foreach ($products as $product): ?>
-                            <?php //include 'product_widget.php' ?>
-                        <?php //endforeach; ?>
-                        <!-- /product widgets -->
-                   <!-- </div>
-                </div>
-            </div>
-
-        </div>
-        <!-- /row -->
-    <!--</div>
-    <!-- /container -->
-<!--</div>
-<!-- /SECTION -->
 
 <?php require 'footer.php' ?>
 
