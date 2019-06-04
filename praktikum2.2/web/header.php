@@ -11,7 +11,7 @@ require 'dbh.inc.php';
 $categoryQuery = "SELECT * FROM category";
 $categories = $conn->query($categoryQuery)->fetchAll();
 
-$selected = 0;
+$selected = null;
 if (isset($_POST['selected'])) {
     $selected = $_POST['selected'];
 }
@@ -20,9 +20,10 @@ if (isset($_POST['searchBar'])) {
     $searchBar = $_POST['searchBar'];
 }
 
-if (($selected != null) && ($searchBar == null)  ) {
 
-    header("Location:product_category.php?selected=" . $selected);
+if (($selected != null) && ($searchBar == null) ) {
+
+   header("Location:product_category.php?selected=" . $selected);
 
 } else if (($searchBar != null)) {
 
@@ -130,14 +131,14 @@ else if (($searchBar == null) || ($selected == null)) {
                 <!-- SEARCH BAR -->
                 <div class="col-md-6">
                     <div class="header-search">
-                        <form action="category_products.php" method="post">
+                        <form action=" " method="post">
                             <select name="selected" class="input-select">
                                 <option value="0">All Categories</option>
                                 <?php foreach ($categories as $category): ?>
-                                    <option value="1"><?php echo $category['name'] ?></option>
+                                    <option value="<?php echo $category['name'] ?>"><?php echo $category['name'] ?></option>
                                 <?php endforeach; ?>
                             </select>
-                            <input class="input" placeholder="Search here">
+                            <input class="input"  name="searchBar" placeholder="Search here">
                             <button type="submit" name="category" class="search-btn">Search</button>
 
                         </form>
@@ -151,7 +152,7 @@ else if (($searchBar == null) || ($selected == null)) {
                     <div class="header-ctn">
                         <!-- Wishlist -->
                         <div>
-                            <a href="#">
+                            <a href="wishlist.php">
                                 <i class="fa fa-heart-o"></i>
                                 <span>Your Wishlist</span>
                                 <div class="qty">2</div>
@@ -161,7 +162,7 @@ else if (($searchBar == null) || ($selected == null)) {
 
                         <!-- Cart -->
                         <div>
-                            <a href="#">
+                            <a href="barcodeScanner.php">
                                 <i class="fa fa-barcode"></i>
                                 <span>Scan barcode</span>
                             </a>
