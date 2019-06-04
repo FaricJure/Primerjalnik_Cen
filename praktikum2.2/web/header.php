@@ -21,7 +21,7 @@ $categories = $conn->query($categoryQuery)->fetchAll();
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>Electro - HTML Ecommerce Template</title>
+    <title>PriceComparer</title>
 
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -66,7 +66,7 @@ $categories = $conn->query($categoryQuery)->fetchAll();
 
                 <li class="nav-item">
                     <form action="logout.inc.php" method="post">
-                <li><a type="submit" href="logout.inc.php" name="logout-submit">Logout</a></li>
+                <li><a type="submit" href="logout.inc.php" name="logout-submit"><i class="fa fa-sign-out"></i>Logout</a></li>
                     </form>
                 </li>
 
