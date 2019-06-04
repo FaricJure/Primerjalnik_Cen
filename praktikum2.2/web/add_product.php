@@ -8,6 +8,7 @@ $stores = $conn->query($storesQuery)->fetchAll();
 $categoryQuery = "SELECT * FROM category";
 $categories = $conn->query($categoryQuery)->fetchAll();
 
+
 if (isset($_POST['product-submit'])) {
     $productName = $_POST['name'];
     $categoryId = $_POST['category'];
@@ -70,7 +71,7 @@ if (isset($_POST['product-submit'])) {
         <input class="input" type="number" name="price" placeholder="Price">
     </div>
     <div class="form-group">
-        <input class="input" type="number" name="barcode" placeholder="Barcode">
+        <input class="input" type="number" name="barcode"  value="<?php if(isset($_GET['koda'])){echo $_GET['koda']; } ?>" placeholder="Barcode">
     </div>
         <textarea id="subject" name="description" placeholder="Description" style="height:200px;width:100%"></textarea>
 <br><br>
