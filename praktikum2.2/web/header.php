@@ -43,8 +43,6 @@ if (($selected != null) && ($searchBar == null)  ) {
 else if (($searchBar == null) || ($selected == null)) {
     echo " ";
 }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +53,7 @@ else if (($searchBar == null) || ($selected == null)) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>Electro - HTML Ecommerce Template</title>
+    <title>PriceComparer</title>
 
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -90,27 +88,24 @@ else if (($searchBar == null) || ($selected == null)) {
     <!-- TOP HEADER -->
     <div id="top-header">
         <div class="container">
-            <?php if (isset($_SESSION['id'])) { ?>
-                <ul class="header-links pull-left">
+            <ul class="header-links pull-left">
 
-                    <li><a href="add_product.php"><i class="fa fa-plus"></i> Add new product</a></li>
-                    <li><a href="#"><i class="fa fa-list"></i> Your listed products</a></li>
-                </ul>
-
-                <ul class="header-links pull-right">
+                <li><a href="add_product.php"><i class="fa fa-plus"></i> Add new product</a></li>
+                <li><a href="#"><i class="fa fa-list"></i> Your listed products</a></li>
+            </ul>
+            <ul class="header-links pull-right">
                 <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
 
                 <li class="nav-item">
                     <form action="logout.inc.php" method="post">
                 <li><a type="submit" href="logout.inc.php" name="logout-submit">Logout</a></li>
-                </form>
+                    </form>
                 </li>
-            <?php } else { ?>
-                <li class="nav-item"><a class="nav-link" href="login.php" id="login"><i class="fa fa-sign-in"></i>Login</a>
-                </li>
+
+                <li class="nav-item"><a class="nav-link" href="login.php" id="login"><i class="fa fa-sign-in"></i>Login</a></li>
                 <li><a href="signup.php"><i class="fa fa-user-plus"></i>Signup</a></li>
-                </ul>
-            <?php } ?>
+            </ul>
+
         </div>
     </div>
     <!-- /TOP HEADER -->
@@ -135,28 +130,28 @@ else if (($searchBar == null) || ($selected == null)) {
                 <!-- SEARCH BAR -->
                 <div class="col-md-6">
                     <div class="header-search">
-                        <form action=" " method="post">
+                        <form action="category_products.php" method="post">
                             <select name="selected" class="input-select">
                                 <option value="0">All Categories</option>
                                 <?php foreach ($categories as $category): ?>
-                                    <option value="<?php echo $category['name'] ?>"><?php echo $category['name'] ?></option>
+                                    <option value="1"><?php echo $category['name'] ?></option>
                                 <?php endforeach; ?>
                             </select>
-                            <input class="input" name="searchBar" type="text" placeholder="Search here">
-                            <button name="button" class="search-btn">Search</button>
+                            <input class="input" placeholder="Search here">
+                            <button type="submit" name="category" class="search-btn">Search</button>
+
                         </form>
                     </div>
                 </div>
                 <!-- /SEARCH BAR -->
 
-                <!--  Redirect to another page if user click one of categories formv dropdoewn menu -->
 
                 <!-- ACCOUNT -->
                 <div class="col-md-3 clearfix">
                     <div class="header-ctn">
                         <!-- Wishlist -->
                         <div>
-                            <a href="wishlist.php">
+                            <a href="#">
                                 <i class="fa fa-heart-o"></i>
                                 <span>Your Wishlist</span>
                                 <div class="qty">2</div>
@@ -166,7 +161,7 @@ else if (($searchBar == null) || ($selected == null)) {
 
                         <!-- Cart -->
                         <div>
-                            <a href="barcodeScanner.php">
+                            <a href="#">
                                 <i class="fa fa-barcode"></i>
                                 <span>Scan barcode</span>
                             </a>
@@ -203,6 +198,7 @@ else if (($searchBar == null) || ($selected == null)) {
             <ul class="main-nav nav navbar-nav">
                 <li class="active"><a href="index.php">Home</a></li>
                 <li><a href="#">Categories</a></li>
+
 
             </ul>
             <!-- /NAV -->
