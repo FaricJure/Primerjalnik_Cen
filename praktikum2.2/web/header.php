@@ -7,10 +7,8 @@
  */
 session_start();
 require 'dbh.inc.php';
-
 $categoryQuery = "SELECT * FROM category";
 $categories = $conn->query($categoryQuery)->fetchAll();
-
 $selected = null;
 if (isset($_POST['selected'])) {
     $selected = $_POST['selected'];
@@ -19,31 +17,24 @@ $searchBar = null;
 if (isset($_POST['searchBar'])) {
     $searchBar = $_POST['searchBar'];
 }
-
-
 if (($selected != null) && ($searchBar == null) ) {
-
-   header("Location:product_category.php?selected=" . $selected);
-
+    header("Location:product_category.php?selected=" . $selected);
 } else if (($searchBar != null)) {
-
     $sql = "Select product.id as id , store.name as storeName from product join product_store on product.id=product_store.product_id 
    join  store on store.id=product_store.store_id where  product.name='$searchBar'";
-
     $productInfo = $conn->query($sql)->fetchAll();
-
     foreach ($productInfo as $info):
-
         $prodId = $info['id'];
         $storeName = $info['storeName'];
-
     endforeach;
-
     header("Location:product.php?id=" . $prodId . "&name=" . $searchBar . "&store=" . $storeName);
 }
 else if (($searchBar == null) || ($selected == null)) {
     echo " ";
 }
+$uid = $_SESSION['id'];
+$wishlist = "SELECT * FROM wishlist WHERE user_id='$uid'";
+$countProducts = $conn->query($wishlist)->rowCount();
 ?>
 
 <!DOCTYPE html>
@@ -100,7 +91,7 @@ else if (($searchBar == null) || ($selected == null)) {
                 <li class="nav-item">
                     <form action="logout.inc.php" method="post">
                 <li><a type="submit" href="logout.inc.php" name="logout-submit">Logout</a></li>
-                    </form>
+                </form>
                 </li>
 
                 <li class="nav-item"><a class="nav-link" href="login.php" id="login"><i class="fa fa-sign-in"></i>Login</a></li>
@@ -155,7 +146,7 @@ else if (($searchBar == null) || ($selected == null)) {
                             <a href="wishlist.php">
                                 <i class="fa fa-heart-o"></i>
                                 <span>Your Wishlist</span>
-                                <div class="qty">2</div>
+                                <div class="qty"><?= $countProducts?></div>
                             </a>
                         </div>
                         <!-- /Wishlist -->
