@@ -51,6 +51,8 @@ if(isset($_SESSION['id'])){
     $products = $conn->query($wishlist)->fetchAll();
 
 
+
+
 }
 
 ?>
