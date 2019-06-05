@@ -123,14 +123,14 @@ $countProducts = $conn->query($wishlist)->rowCount();
                 <div class="col-md-6">
                     <div class="header-search">
                         <form action=" " method="post">
-                            <select name="selected" class="input-select">
+                            <select class="input-select" name="selected">
                                 <option value="0">All Categories</option>
                                 <?php foreach ($categories as $category): ?>
                                     <option value="<?php echo $category['name'] ?>"><?php echo $category['name'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <input class="input"  name="searchBar" placeholder="Search here">
-                            <button type="submit" name="category" class="search-btn">Search</button>
+                            <button class="search-btn" type="submit" name="category">Search</button>
 
                         </form>
                     </div>
