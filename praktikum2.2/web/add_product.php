@@ -68,7 +68,7 @@ if (isset($_POST['product-submit'])) {
     </div>
         <br><br><br><br>
     <div class="form-group">
-        <input class="input" type="number" name="price" placeholder="Price">
+        <input class="input" type="number" name="price" step="0.01" min="0"placeholder="Price">
     </div>
     <div class="form-group">
         <input class="input" type="number" name="barcode"  value="<?php if(isset($_GET['koda'])){echo $_GET['koda']; } ?>" placeholder="Barcode">
