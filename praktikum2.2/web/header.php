@@ -160,20 +160,24 @@ else if ($selected=="allCategories") {
                     <div class="header-ctn">
                         <!-- Wishlist -->
                         <div>
+                          <?php if(isset($_SESSION['id'])){ ?>
                             <a href="wishlist.php">
                                 <i class="fa fa-heart-o"></i>
                                 <span>Your Wishlist</span>
                                 <div class="qty">2</div>
                             </a>
+                            <?php } ?>
                         </div>
                         <!-- /Wishlist -->
 
                         <!-- Cart -->
                         <div>
+                            <?php  if(isset($_SESSION['id'])){?>
                             <a href="barcodeScanner.php">
                                 <i class="fa fa-barcode"></i>
                                 <span>Scan barcode</span>
                             </a>
+                            <?php  } ?>
                         </div>
                         <!-- /Cart -->
 
