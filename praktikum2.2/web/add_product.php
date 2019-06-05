@@ -20,7 +20,7 @@ if (isset($_POST['product-submit'])) {
     $subcategory = 1;
 
 
-    $insertProduct = $conn->prepare("INSERT INTO product(name,price,barcode,image_url,category_id,description,subcategory_id) VALUES (?,?,?,?,?,?,?),(?,?,?,?,0,?,?)");
+    $insertProduct = $conn->prepare("INSERT INTO product(name,price,barcode,image_url,category_id,description,subcategory_id) VALUES (?,?,?,?,?,?,?)");
     $insertProduct->execute([$productName, $price, $barcode, $image, $categoryId, $description, $subcategory]);
     $productId = $conn->lastInsertId();
 
