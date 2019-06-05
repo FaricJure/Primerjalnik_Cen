@@ -21,14 +21,15 @@ if (isset($_POST['searchBar'])) {
 }
 
 
-if (($selected != null) && ($searchBar == null) ) {
+if (($selected != null) && ($searchBar == null) && ($selected != 'allCategories')) {
 
    header("Location:product_category.php?selected=" . $selected);
 
 } else if (($searchBar != null)) {
 
+
     $sql = "Select product.id as id , store.name as storeName from product join product_store on product.id=product_store.product_id 
-   join  store on store.id=product_store.store_id where  product.name='$searchBar'";
+    join  store on store.id=product_store.store_id where  product.name='$searchBar'";
 
     $productInfo = $conn->query($sql)->fetchAll();
 
@@ -41,8 +42,10 @@ if (($selected != null) && ($searchBar == null) ) {
 
     header("Location:product.php?id=" . $prodId . "&name=" . $searchBar . "&store=" . $storeName);
 }
-else if (($searchBar == null) || ($selected == null)) {
-    echo " ";
+else if ($selected=="allCategories") {
+
+    header("Location:index.php");
+
 }
 ?>
 
@@ -89,12 +92,16 @@ else if (($searchBar == null) || ($selected == null)) {
     <!-- TOP HEADER -->
     <div id="top-header">
         <div class="container">
-            <ul class="header-links pull-left">
 
+           <ul class="header-links pull-left">
+               <?php if(isset($_SESSION['id'])){?>
                 <li><a href="add_product.php"><i class="fa fa-plus"></i> Add new product</a></li>
-                <li><a href="#"><i class="fa fa-list"></i> Your listed products</a></li>
+                <li><a href="listedproducts.php"><i class="fa fa-list"></i> Your listed products</a></li>
+                <?php }?>
             </ul>
+
             <ul class="header-links pull-right">
+                <?php if(isset($_SESSION['id'])){?>
                 <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
 
                 <li class="nav-item">
@@ -102,9 +109,10 @@ else if (($searchBar == null) || ($selected == null)) {
                 <li><a type="submit" href="logout.inc.php" name="logout-submit">Logout</a></li>
                     </form>
                 </li>
-
+                <?php } else{ ?>
                 <li class="nav-item"><a class="nav-link" href="login.php" id="login"><i class="fa fa-sign-in"></i>Login</a></li>
                 <li><a href="signup.php"><i class="fa fa-user-plus"></i>Signup</a></li>
+                <?php } ?>
             </ul>
 
         </div>
@@ -133,7 +141,7 @@ else if (($searchBar == null) || ($selected == null)) {
                     <div class="header-search">
                         <form action=" " method="post">
                             <select name="selected" class="input-select">
-                                <option value="0">All Categories</option>
+                                <option value="allCategories" name="allCategories" >Categories</option>
                                 <?php foreach ($categories as $category): ?>
                                     <option value="<?php echo $category['name'] ?>"><?php echo $category['name'] ?></option>
                                 <?php endforeach; ?>
