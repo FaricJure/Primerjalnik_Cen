@@ -7,21 +7,24 @@
  */
 ?>
 
-<?php require 'header.php' ?>
-<?php if (isset($_GET['id'])) {
+
+
+<?php
+
+include "dbh.inc.php";
+
+if (isset($_GET['id'])) {
     $productId = $_GET['id'];
-    $product = $conn->query("SELECT * FROM product WHERE id='$productId'");
-    $product->execute();
-    $product->setFetchMode(PDO::FETCH_OBJ);
-    $products = [];
-    $storeName=$_GET['store'];
-    $productName=$_GET['name'];
+    $productQuery = $conn->query("SELECT * FROM product WHERE id='$productId'");
+    $product = $productQuery->fetch();
+    $storeName = $_GET['store'];
+    $productName = $_GET['name'];
 
-    while ($row = $product->fetchObject()) {
-        $products[] = $row;
-    }
+    // Get product visits from database, and update.
+    $visitsUpdated = $product['visits'] + 1;
+    $conn->query("UPDATE product SET visits = '$visitsUpdated' WHERE id = '$productId'")->execute();
 
-     $otherStores = $conn->query("Select store.name as storeName ,product.price as productPrice, product.id as productId from store 
+    $otherStores = $conn->query("Select store.name as storeName ,product.price as productPrice, product.id as productId from store 
      join product_store on store.id=product_store.store_id 
      join product on product_store.product_id=product.id where product.name='" . $productName . "' ");
 
@@ -29,16 +32,25 @@
     $otherStores->setFetchMode(PDO::FETCH_OBJ);
     $stores = [];
 
-    $storesCount=null;
+    $storesCount = null;
     while ($row = $otherStores->fetchObject()) {
         $stores[] = $row;
         $stores++;
     }
 }
 
+
+if (isset($_POST['delete'])) {
+    $productId = $_POST['id'];
+    $sql = $conn->query("DELETE FROM product WHERE id ='$productId'");
+    $sql->execute();
+    header("Location: index.php");
+    exit();
+}
+
+include "header.php";
 ?>
 
-<?php foreach ($products as $prod): ?>
     <!-- SECTION -->
     <div class="section">
     <!-- container -->
@@ -49,19 +61,7 @@
     <div class="col-md-5">
         <div id="product-main-img">
             <div class="product-preview">
-                <img src="<?php echo('img/' . trim($prod->image_url)) ?>" alt="">
-            </div>
-
-            <div class="product-preview">
-                <img src="img/product03.png" alt="">
-            </div>
-
-            <div class="product-preview">
-                <img src="img/product06.png" alt="">
-            </div>
-
-            <div class="product-preview">
-                <img src="img/product08.png" alt="">
+                <img src="<?php echo('img/' . trim($product['image_url'])) ?>" alt="">
             </div>
         </div>
     </div>
@@ -70,9 +70,24 @@
     <!-- Product details -->
     <div class="col-md-5">
         <div class="product-details">
-            <h2 class="product-name"><?php if (isset($_GET['name'])) {
-                    echo $_GET['name'];
-                } ?></h2>
+            <h2 class="product-name"><?php echo $product['name'] ?></h2>
+            <?php if (isset($_SESSION['isadmin']) && $_SESSION['isadmin']==1)  { ?>
+            <div class="buttons-manage">
+                <div class="col-sm-2">
+                <form method="get" action="product_update.php">
+                    <input type="hidden" name="id" value="<?php echo $productId ?>" />
+                <button class="btn btn-sm btn-primary" name="edit"><i class="fa fa-pencil" ></i> Edit</button>
+                </form>
+                </div>
+                <div class="col-sm-2">
+                <form method="post">
+                    <input type="hidden" name="id" value="<?php echo $productId ?>" />
+                    <button class="btn btn-sm btn-danger" name="delete"><i class="fa fa-trash"></i> Delete</button>
+                </form>
+                </div>
+
+            </div>
+            <?php } ?>
             <div>
                 <div class="product-rating">
                     <i class="fa fa-star"></i>
@@ -81,51 +96,46 @@
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star-o"></i>
                 </div>
-                <a class="review-link" href="#">10 Review(s) | Add your review</a>
+                <a class="review-link" href="#"></a>
             </div>
             <div>
-                <h3 class="product-price"><?php echo $prod->price ?><i class="fa fa-euro"></i></h3>
+                <h3 class="product-price"><?php echo $product['price'] ?><i class="fa fa-euro"></i></h3>
                 <span class="product-available">In Stock</span>
             </div>
-            <p><?php echo $prod->description ?></p>
+            <p><?php echo $product['description'] ?></p>
 
             <ul class="product-btns">
-                <li><a href="#"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
-                <li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li>
+                <li><a href="wishlist.php?pid=<?php echo $product['id']  ?>&uid=<?php echo $_SESSION['id']?>"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
+
             </ul>
 
             <ul class="product-shops">
                 <?php
                 foreach ($stores as $store):
-                     if($store->$storeName='Merkator'){
-                    ?>
+                    if ($store->$storeName = 'Merkator') {
+                        ?>
+                        <li>
+                            <a href="#"><img src="img/mercator.png"><?php echo $store->storeName ?></a>
+                            <b class="product-price pull-right"><i
+                                        class="fa fa-euro"></i> <?php echo $store->productPrice ?></b>
+                        </li>
+                        <hr>
+                        <?php
+                        continue;
 
+                    } elseif ($store->storeName = 'Tus') {
+                        ?>
 
+                        <li>
+                            <a href="#"><img src="img/tus.png"><?php echo $store->storeName ?></a>
+                            <b class="product-price pull-right"><i
+                                        class="fa fa-euro"></i> <?php echo $store->productPrice ?></b>
+                        </li>
 
-                <li>
-                    <a href="#"><img src="img/mercator.png"><?php echo $store->storeName ?></a>
-                    <b class="product-price pull-right"><i class="fa fa-euro"></i> <?php echo $store->productPrice ?></b>
-                </li>
-                <hr>
-                <?php
-                     continue;
-
-                     }
-                elseif ($store->storeName='Tus'){
-                         ?>
-
-                    <li>
-                        <a href="#"><img src="img/tus.png"><?php echo $store->storeName ?></a>
-                        <b class="product-price pull-right"><i class="fa fa-euro"></i> <?php echo $store->productPrice ?></b>
-                    </li>
-
-
-
-                         <?php
-
-                     break;
-                     }
-                endforeach;
+                        <?php
+                        break;
+                    }
+endforeach;
                 ?>
 
             </ul>
@@ -146,7 +156,6 @@
 
         </div>
     </div>
-<?php endforeach; ?>
     <!-- /Product details -->
 
     <!-- Product tab -->
@@ -155,8 +164,8 @@
             <!-- product tab nav -->
             <ul class="tab-nav">
                 <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
-                <li><a data-toggle="tab" href="#tab2">Details</a></li>
-                <li><a data-toggle="tab" href="#tab3">Reviews (3)</a></li>
+                <li><a data-toggle="tab" href="#tab2">Category</a></li>
+                <li><a data-toggle="tab" href="#tab3"></a></li>
             </ul>
             <!-- /product tab nav -->
 
@@ -166,16 +175,11 @@
                 <div id="tab1" class="tab-pane fade in active">
                     <div class="row">
                         <div class="col-md-12">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                                non proident, sunt in culpa qui officia deserunt mollit anim id est
-                                laborum.</p>
+                            <p><?php echo $product['description'] ?></p>
                         </div>
                     </div>
                 </div>
+
                 <!-- /tab1  -->
 
                 <!-- tab2  -->

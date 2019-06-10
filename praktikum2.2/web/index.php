@@ -89,7 +89,7 @@ $products = $conn->query($productQuery)->fetchAll();
                         <div id="tab2" class="tab-pane fade in active">
                             <div class="products-slick" data-nav="#slick-nav-2">
                                 <!-- products -->
-                              
+
                                 <!-- /products -->
                             </div>
                             <div id="slick-nav-2" class="products-slick-nav"></div>

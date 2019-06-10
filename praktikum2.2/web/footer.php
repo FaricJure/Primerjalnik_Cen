@@ -23,11 +23,11 @@ $categories = $conn->query($categoryQuery)->fetchAll();
                 <div class="col-md-3 col-xs-6">
                     <div class="footer">
                         <h3 class="footer-title">About Us</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
+                        <p>Price Comparer is a free website for comparing prices of products in different markets</p>
                         <ul class="footer-links">
-                            <li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
-                            <li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
-                            <li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+                            <li><a href="#"><i class="fa fa-map-marker"></i>2000 Maribor</a></li>
+                            <li><a href="#"><i class="fa fa-phone"></i>+386-75-510-840</a></li>
+                            <li><a href="#"><i class="fa fa-envelope-o"></i>price_comparer@email.com</a></li>
                         </ul>
                     </div>
                 </div>
@@ -50,10 +50,10 @@ $categories = $conn->query($categoryQuery)->fetchAll();
                         <h3 class="footer-title">Service</h3>
                         <ul class="footer-links">
                             <li><a href="#">My Account</a></li>
-                            <li><a href="#">View Cart</a></li>
-                            <li><a href="#">Wishlist</a></li>
-                            <li><a href="#">Track My Order</a></li>
-                            <li><a href="#">Help</a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="wishlist.php">Wishlist</a></li>
+                            <li><a href="#"></a></li>
+                            <li><a href="#"></a></li>
                         </ul>
                     </div>
                 </div>

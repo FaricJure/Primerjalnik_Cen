@@ -17,11 +17,11 @@ $searchBar = null;
 if (isset($_POST['searchBar'])) {
     $searchBar = $_POST['searchBar'];
 }
-if (($selected != null) && ($searchBar == null) ) {
+if (($selected != null) && ($searchBar == null) && ($selected != 'allCategories')) {
     header("Location:product_category.php?selected=" . $selected);
 } else if (($searchBar != null)) {
     $sql = "Select product.id as id , store.name as storeName from product join product_store on product.id=product_store.product_id 
-   join  store on store.id=product_store.store_id where  product.name='$searchBar'";
+    join  store on store.id=product_store.store_id where  product.name='$searchBar'";
     $productInfo = $conn->query($sql)->fetchAll();
     foreach ($productInfo as $info):
         $prodId = $info['id'];
@@ -29,12 +29,15 @@ if (($selected != null) && ($searchBar == null) ) {
     endforeach;
     header("Location:product.php?id=" . $prodId . "&name=" . $searchBar . "&store=" . $storeName);
 }
-else if (($searchBar == null) || ($selected == null)) {
-    echo " ";
+else if ($selected=="allCategories") {
+    header("Location:index.php");
 }
-$uid = $_SESSION['id'];
-$wishlist = "SELECT * FROM wishlist WHERE user_id='$uid'";
-$countProducts = $conn->query($wishlist)->rowCount();
+$countProducts=0;
+if(isset($_SESSION['id'])) {
+    $uid = $_SESSION['id'];
+    $wishlist = "SELECT * FROM wishlist WHERE user_id='$uid'";
+    $countProducts = $conn->query($wishlist)->rowCount();
+}
 ?>
 
 <!DOCTYPE html>
@@ -80,22 +83,27 @@ $countProducts = $conn->query($wishlist)->rowCount();
     <!-- TOP HEADER -->
     <div id="top-header">
         <div class="container">
+
             <ul class="header-links pull-left">
-
-                <li><a href="add_product.php"><i class="fa fa-plus"></i> Add new product</a></li>
-                <li><a href="#"><i class="fa fa-list"></i> Your listed products</a></li>
+                <?php if(isset($_SESSION['id'])){?>
+                    <li><a href="add_product.php"><i class="fa fa-plus"></i> Add new product</a></li>
+                    <li><a href="listedproducts.php"><i class="fa fa-list"></i> Your listed products</a></li>
+                <?php }?>
             </ul>
+
             <ul class="header-links pull-right">
-                <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                <?php if(isset($_SESSION['id'])){?>
+                    <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
 
-                <li class="nav-item">
-                    <form action="logout.inc.php" method="post">
-                <li><a type="submit" href="logout.inc.php" name="logout-submit">Logout</a></li>
-                </form>
-                </li>
-
-                <li class="nav-item"><a class="nav-link" href="login.php" id="login"><i class="fa fa-sign-in"></i>Login</a></li>
-                <li><a href="signup.php"><i class="fa fa-user-plus"></i>Signup</a></li>
+                    <li class="nav-item">
+                        <form action="logout.inc.php" method="post">
+                    <li><a type="submit" href="logout.inc.php" name="logout-submit">Logout</a></li>
+                    </form>
+                    </li>
+                <?php } else{ ?>
+                    <li class="nav-item"><a class="nav-link" href="login.php" id="login"><i class="fa fa-sign-in"></i>Login</a></li>
+                    <li><a href="signup.php"><i class="fa fa-user-plus"></i>Signup</a></li>
+                <?php } ?>
             </ul>
 
         </div>
@@ -112,7 +120,7 @@ $countProducts = $conn->query($wishlist)->rowCount();
                 <div class="col-md-3">
 
                     <div class="header-logo">
-                        <a href="index.php" class="logo">
+                        <a href="#" class="logo">
                             <img src="img/slika.png" alt="">
                         </a>
                     </div>
@@ -123,14 +131,14 @@ $countProducts = $conn->query($wishlist)->rowCount();
                 <div class="col-md-6">
                     <div class="header-search">
                         <form action=" " method="post">
-                            <select class="input-select" name="selected">
-                                <option value="0">All Categories</option>
+                            <select name="selected" class="input-select">
+                                <option value="allCategories" name="allCategories" >Categories</option>
                                 <?php foreach ($categories as $category): ?>
                                     <option value="<?php echo $category['name'] ?>"><?php echo $category['name'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                             <input class="input"  name="searchBar" placeholder="Search here">
-                            <button class="search-btn" type="submit" name="category">Search</button>
+                            <button type="submit" name="category" class="search-btn">Search</button>
 
                         </form>
                     </div>
@@ -143,20 +151,24 @@ $countProducts = $conn->query($wishlist)->rowCount();
                     <div class="header-ctn">
                         <!-- Wishlist -->
                         <div>
-                            <a href="wishlist.php">
-                                <i class="fa fa-heart-o"></i>
-                                <span>Your Wishlist</span>
-                                <div class="qty"><?= $countProducts?></div>
-                            </a>
+                            <?php if(isset($_SESSION['id'])){ ?>
+                                <a href="wishlist.php">
+                                    <i class="fa fa-heart-o"></i>
+                                    <span>Your Wishlist</span>
+                                    <div class="qty"><?= $countProducts?></div>
+                                </a>
+                            <?php } ?>
                         </div>
                         <!-- /Wishlist -->
 
                         <!-- Cart -->
                         <div>
-                            <a href="barcodeScanner.php">
-                                <i class="fa fa-barcode"></i>
-                                <span>Scan barcode</span>
-                            </a>
+                            <?php  if(isset($_SESSION['id'])){?>
+                                <a href="barcodeScanner.php">
+                                    <i class="fa fa-barcode"></i>
+                                    <span>Scan barcode</span>
+                                </a>
+                            <?php  } ?>
                         </div>
                         <!-- /Cart -->
 

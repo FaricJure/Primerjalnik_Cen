@@ -20,7 +20,7 @@ if (isset($_GET['pid'])) {
         $addInWishlist = $conn->prepare("INSERT INTO wishlist(product_id,user_id,date) VALUES(?,?,?)");
         $addInWishlist->execute([$pid, $uid, $time]);
 
-       header("Location:index.php");
+       header("Location:wishlist.php");
 
     } else {
 
@@ -41,7 +41,7 @@ if(isset($_SESSION['id'])){
 
     $uid = $_SESSION['id'];
 
-    $wishlist="Select product.id as productId,product.name as productName ,store.name as sotreName,product.price as price ,product.image_url as image 
+    $wishlist="Select product.id as productId,product.name as productName ,store.name as storeName,product.price as price ,product.image_url as image 
                from user join wishlist on user.id=wishlist.user_id 
                join product on product.id=wishlist.product_id
                join product_store on product.id=product_store.product_id 
