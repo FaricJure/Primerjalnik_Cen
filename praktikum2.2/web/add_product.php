@@ -36,7 +36,7 @@ if (isset($_POST['product-submit'])) {
         </div>
         <form method="post">
             <div class="form-group">
-                <input class="input" type="text" name="name" placeholder="Name">
+                <input class="input" type="text" name="name" placeholder="Name" required>
             </div>
 
             <div class="form-group">
@@ -68,17 +68,17 @@ if (isset($_POST['product-submit'])) {
             </div>
             <br><br><br><br>
             <div class="form-group">
-                <input class="input" type="number" name="price" step="0.01" min="0" placeholder="Price">
+                <input class="input" type="number" name="price" step="0.01" min="0" placeholder="Price" required>
             </div>
             <div class="form-group">
                 <input class="input" type="number" name="barcode" value="<?php if (isset($_GET['koda'])) {
                     echo $_GET['koda'];
-                } ?>" placeholder="Barcode">
+                } ?>" placeholder="Barcode" required>
             </div>
             <textarea id="subject" name="description" placeholder="Description"
-                      style="height:200px;width:100%"></textarea>
+                      style="height:200px;width:100%" required></textarea>
             <br><br>
-            <input class="input" type="file" name="image" placeholder="Image URL">
+            <input class="input" type="file" name="image" placeholder="Image URL" required>
             <br>
             <input class="primary-btn cta-btn" type="submit" name="product-submit">
             <br><br>
