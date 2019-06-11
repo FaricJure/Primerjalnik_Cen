@@ -7,7 +7,7 @@ if (isset($_POST['login-submit'])) {
     $password = $_POST['pwd'];
 
     if (empty($mailuid) || empty($password)) {
-        header("Location:comments.php?error=emptyfields");
+        header("Location:login.php?error=emptyfields");
         exit();
     } else {
         $sql = "SELECT * FROM user WHERE uid=?;";
@@ -17,7 +17,7 @@ if (isset($_POST['login-submit'])) {
             if ($row = $stmt->fetch()) {
                 $pwdCheck = password_verify($password, $row['pwd']);
                 if ($pwdCheck == false) {
-                    header("Location: comments.php?error=wrongpwd");
+                    header("Location: login.php?error=wrongpwd");
                     exit();
                 } elseif ($pwdCheck == true) {
                     session_start();
@@ -32,12 +32,12 @@ if (isset($_POST['login-submit'])) {
                     exit();
 
                 } else {
-                    header("Location: index.php?error=wrongpwd");
+                    header("Location: login.php?error=wrongpwd");
                     exit();
                 }
 
             } else {
-                header("Location: index.php?error=nouser");
+                header("Location: login.php?error=nouser");
                 exit();
             }
         } else {
