@@ -93,11 +93,11 @@ if(isset($_SESSION['id'])) {
 
             <ul class="header-links pull-right">
                 <?php if(isset($_SESSION['id'])){?>
-                    <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+
 
                     <li class="nav-item">
                         <form action="logout.inc.php" method="post">
-                    <li><a type="submit" href="logout.inc.php" name="logout-submit">Logout</a></li>
+                    <li><a type="submit" href="logout.inc.php" name="logout-submit"><i class="fa fa-sign-out"></i>Logout</a></li>
                     </form>
                     </li>
                 <?php } else{ ?>
