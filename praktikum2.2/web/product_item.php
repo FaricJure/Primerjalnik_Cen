@@ -28,8 +28,9 @@
                 } ?>"/>
             </div>
             <div class="product-btns">
-                <button class="add-to-wishlist" type="submit" name="pid" value="<?php echo $product['productId'] ?>"><i
-                            class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                <?php if (isset($_SESSION['id'])) { ?><button class="add-to-wishlist" type="submit" name="pid" value="<?php echo $product['productId'] ?>" ><i
+                            class="fa fa-he art-o"></i><span class="tooltipp">add to wishlist</span></button>
+                <?php  } ?>
                 <button class="add-to-compare"><i class="fa fa-exchange"></i><span
                             class="tooltipp">add to compare</span></button>
                 <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">view product</span></button>
