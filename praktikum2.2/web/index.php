@@ -16,6 +16,13 @@ $productQuery = "Select product.id as productId,product.name as productName ,sto
     group by product.name";
 $products = $conn->query($productQuery)->fetchAll();
 
+// Most visited products.
+$mostVisitedProductsQuery = $conn->query("SELECT product.id as productId,product.name as productName ,store.name as storeName, product.price as price ,product.image_url as image 
+ from product  
+ join product_store on product.id=product_store.product_id 
+ join store on store.id=product_store.store_id
+ ORDER BY visits LIMIT 10");
+$mostVisitedProducts = $mostVisitedProductsQuery->fetchAll();
 
 ?>
 
@@ -89,7 +96,9 @@ $products = $conn->query($productQuery)->fetchAll();
                         <div id="tab2" class="tab-pane fade in active">
                             <div class="products-slick" data-nav="#slick-nav-2">
                                 <!-- products -->
-
+                                <?php foreach ($mostVisitedProducts as $product): ?>
+                                    <?php include 'product_item.php' ?>
+                                <?php endforeach; ?>
                                 <!-- /products -->
                             </div>
                             <div id="slick-nav-2" class="products-slick-nav"></div>
