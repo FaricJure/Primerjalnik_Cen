@@ -19,13 +19,32 @@ if (isset($_POST['product-submit'])) {
     $description = $_POST['description'];
     $subcategory = 1;
 
+    $productQuery = "Select product.id as pid , product.name as productName, store.name as storeName,store.id as storeId from product
+    join product_store on product.id=product_store.product_id 
+    join store on store.id=product_store.store_id
+    where product.name='" . $productName . "' and store.id='" . $storeId . "'";
+    $products = $conn->query($productQuery)->fetchAll();
 
-    $insertProduct = $conn->prepare("INSERT INTO product(name,price,barcode,image_url,category_id,description,subcategory_id) VALUES (?,?,?,?,?,?,?)");
-    $insertProduct->execute([$productName, $price, $barcode, $image, $categoryId, $description, $subcategory]);
-    $productId = $conn->lastInsertId();
+    foreach ($products as $product) {
+        if (($product['productName'] == $productName) && ($product['storeId'] == $storeId)) {
 
-    $insertStore = $conn->prepare("INSERT INTO  product_store(product_id,store_id) VALUES(?,?)");
-    $insertStore->execute([$productId, $storeId]);
+            $URL="product_update.php?id=".$product['pid'];
+            echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+            echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
+
+            break;
+
+        } else {
+
+            $insertProduct = $conn->prepare("INSERT INTO product(name,price,barcode,image_url,category_id,description,subcategory_id,user_id) VALUES (?,?,?,?,?,?,?,?)");
+            $insertProduct->execute([$productName, $price, $barcode, $image, $categoryId, $description, $subcategory, $uid]);
+            $productId = $conn->lastInsertId();
+
+            $insertStore = $conn->prepare("INSERT INTO  product_store(product_id,store_id) VALUES(?,?)");
+            $insertStore->execute([$productId, $storeId]);
+
+        }
+    }
 }
 ?>
 <div class="container">
