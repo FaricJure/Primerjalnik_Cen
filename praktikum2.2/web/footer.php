@@ -37,7 +37,7 @@ $categories = $conn->query($categoryQuery)->fetchAll();
                         <h3 class="footer-title">Categories</h3>
                         <ul class="footer-links">
                             <?php foreach ($categories as $category): ?>
-                                <li><a href="#"><?php echo $category['name'] ?></a></li>
+                                <li><a href="product_category.php?selected=<?php echo $category['name'] ?>"><?php echo $category['name'] ?></a></li>
                             <?php endforeach; ?>
                         </ul>
                     </div>
