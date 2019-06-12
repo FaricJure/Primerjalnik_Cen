@@ -120,7 +120,7 @@ include "header.php";
                                 <img src="img/mercator.png">
                             </div>
                             <div class="col-md-7">
-                                <a href="#"><?php echo $store->storeName ?></a>
+                                <a href="map.php?store=<?php echo $store->storeName ?>"><?php echo $store->storeName ?></a>
                             </div>
                             <div class="col-md-2">
                                 <b class="product-price pull-right">
