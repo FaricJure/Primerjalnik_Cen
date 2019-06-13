@@ -19,21 +19,20 @@ Pri razvijanju projekta smo uporabili že narejen Barcode reader od podjetja <b>
 Link: https://www.dynamsoft.com/
 <br>
 ![alt text](https://github.com/FaricJure/Primerjalnik_Cen/blob/master/praktikum2.2/img/slika_dynamsoft_js.png)<br>
-slika 2: Uporaba dynamsoftovega javascripta.<br>
-<hr>
+slika 2: Uporaba dynamsoftovega javascripta.<br><br>
 Uporabili smo tudi api, ki ti najde public ipv4 od podjetja <b>ipify</b>. Ampak smo ga zamenjali za redno domeno od podjetja <b>freenom</b>.
 <br>
 Link: https://www.ipify.org/
 <br>
 ![alt text](https://github.com/FaricJure/Primerjalnik_Cen/blob/master/praktikum2.2/img/ipv4_uporaba.PNG)<br>
 slika 3: Izsek kode ipify. <br>
-<hr>
+<br>
 Uporabili smo tudi <b>google maps</b> API, ki se uporablja, ko klikneš na sliko od trgovine, da ti prikaže vse najbližje trgovine od izbrane trgovine.
 <br>
 Link: https://cloud.google.com/maps-platform/<br>
 ![alt text](https://github.com/FaricJure/Primerjalnik_Cen/blob/master/praktikum2.2/img/slika_praktikum_googleapi.png)<br>
 slika 4: Uporaba google maps api za prikaz najbližjih trgovin.<br>
-<hr>
+<br>
 Uporabili smo tudi <b>freenom</b>, na katerem smo naredili zastonj domeno na katero se lahko uporabniki povežejo brez, da bi si morali inštalirat naš projekt, kar naredi našo spletno aplikacijo še dodatno enostavno za uporabljat.<br>
 ![alt text](https://github.com/FaricJure/Primerjalnik_Cen/blob/master/praktikum2.2/img/chocolate.jpg)<br>
 Link: https://www.freenom.com/en/index.html?lang=en
