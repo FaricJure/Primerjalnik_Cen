@@ -21,4 +21,5 @@ Uporabili smo tudi api, ki ti najde public ipv4 od podjetja <b>ipify</b>.
 Link: https://www.ipify.org/
 <br>
 Uporabili smo tudi google maps API, ki se uporablja, ko klikneš na sliko od trgovine, da ti prikaže vse najbližje trgovine od izbrane trgovine.
+<br>
 Link: https://cloud.google.com/maps-platform/
