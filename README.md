@@ -5,12 +5,12 @@ Je spletna aplikacija namenjena temu, da primerjamo ceno enega izdelka iz večih
 
 # Ideja aplikacije
 Naša spletna aplikacija deluje na računalniku pravtako pa tudi na mobilni aplikaciji. Imamo seznam vseh izdelkov, ki so jih dodali uporabniki spletne aplikacije. Te izdelke lahko izberete in se vam pokažejo dodatne informacije kot so: cena, lokacija izdelka, slika izdelka, cenovni diferencial(procentualna razlika med največjo ceno in najmanjšo),... z teh informacij se lahko odločimo kje bomo kupili izdelek. Pri tem pa si lahko pomagamo z google maps z klikom na trgovino, ki nam prikaže najbližje lokacije izbrane trgovine. Imamo tudi "wishlist", ki je lahko uporabljen kot ene vrste "shoppinglist" kjer si zapišemo vse izdelke, ki jih imamo namen kupit preden gremo v trgovino.
-
+# Inštalacija
+Pritisk na gumb clone or download. Downloadate v obliki .zip dokumenta. Zatem unzipate pa dodate v htdocs folder v XAMPP mapi(ali na podoben način na drugih aplikacijah). Start apache na XAMPP -> pritisk na gumb admin -> izbereš index.php zatem pa slediš navodilam iz <b>Uporaba aplikacije</b>.
 # Uporaba aplikacije
 Začetna stran je index.php kjer je opcija za prijavo in registracijo. Po registraciji/prijavi pa je na voljo dodajanje izdelkov in pregled vseh izdelkov. Pri vnašanju izdelkov je potrebno vnesti barcode ali pa ga skeniraš z scannerjem z pritiskom na gumb "scan". Za primerjavo pa gremo na podrobnost izdelka in če je isti izdelek dodan v drugi trgovini se prikažejo opcije za primerjavo cen iz drugih trgovin.
 
-# Inštalacija
-Pritisk na gumb clone or download. Downloadate v obliki .zip dokumenta. Zatem unzipate pa dodate v htdocs folder v XAMPP mapi(ali na podoben način na drugih aplikacijah). Start apache na XAMPP -> pritisk na gumb admin -> izbereš index.php zatem pa slediš navodilam iz <b>how to use?</b>.
+
 
 # API-i, ki smo jih uporabili
 Pri razvijanju projekta smo uporabili že narejen Barcode reader od podjetja <b>dynamsoft</b>.<br>
