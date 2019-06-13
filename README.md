@@ -13,8 +13,9 @@ Začetna stran je index.php kjer je opcija za prijavo in registracijo. Po regist
 Pritisk na gumb clone or download. Downloadate v obliki .zip dokumenta. Zatem unzipate pa dodate v htdocs folder v XAMPP mapi(ali na podoben način na drugih aplikacijah). Start apache na XAMPP -> pritisk na gumb admin -> izbereš index.php zatem pa slediš navodilam iz <b>how to use?</b>.
 
 # API-i, ki smo jih uporabili
-Pri razvijanju projekta smo uporabili že narejen Barcode reader od podjetja <b>dynamsoft</b>.
+Pri razvijanju projekta smo uporabili že narejen Barcode reader od podjetja <b>dynamsoft</b>.<br>
 Link: https://www.dynamsoft.com/
+<br>
 Uporabili smo tudi api, ki ti najde public ipv4 od podjetja <b>ipify</b>.
 <br>
 Link: https://www.ipify.org/
