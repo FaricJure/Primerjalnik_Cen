@@ -28,7 +28,7 @@ Link: https://www.ipify.org/
 Uporabili smo tudi google maps API, ki se uporablja, ko klikneš na sliko od trgovine, da ti prikaže vse najbližje trgovine od izbrane trgovine.
 <br>
 Link: https://cloud.google.com/maps-platform/<br>
-![alt text](https://github.com/FaricJure/Primerjalnik_Cen/blob/master/praktikum2.2/img/chocolate.jpg)<br>
+![alt text](https://github.com/FaricJure/Primerjalnik_Cen/blob/master/praktikum2.2/img/slika_praktikum_googleapi.png)<br>
 slika 3: uporaba google maps api za prikaz najbližjih trgovin.<br>
 Uporabili smo tudi freenom, na katerem smo naredili zastonj domeno na katero se lahko uporabniki povežejo brez, da bi si morali inštalirat naš projekt, kar naredi našo spletno aplikacijo še dodatno enostavno za uporabljat.<br>
 ![alt text](https://github.com/FaricJure/Primerjalnik_Cen/blob/master/praktikum2.2/img/chocolate.jpg)<br>
