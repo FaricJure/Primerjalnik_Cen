@@ -19,7 +19,7 @@ Pri razvijanju projekta smo uporabili že narejen Barcode reader od podjetja <b>
 Link: https://www.dynamsoft.com/
 <br>
 ![alt text](https://github.com/FaricJure/Primerjalnik_Cen/blob/master/praktikum2.2/img/chocolate.jpg)<br>
-slika 2: Uporaba dynamsofttovega javascripta.<br>
+slika 2: Uporaba dynamsoftovega javascripta.<br>
 Uporabili smo tudi api, ki ti najde public ipv4 od podjetja <b>ipify</b>.
 <br>
 Link: https://www.ipify.org/
