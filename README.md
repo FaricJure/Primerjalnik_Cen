@@ -34,7 +34,7 @@ Link: https://cloud.google.com/maps-platform/<br>
 slika 4: Uporaba google maps api za prikaz najbližjih trgovin.<br>
 <br>
 Uporabili smo tudi <b>freenom</b>, na katerem smo naredili zastonj domeno na katero se lahko uporabniki povežejo brez, da bi si morali inštalirat naš projekt, kar naredi našo spletno aplikacijo še dodatno enostavno za uporabljat.<br>
-![alt text](https://github.com/FaricJure/Primerjalnik_Cen/blob/master/praktikum2.2/img/chocolate.jpg)<br>
+![alt text](https://github.com/FaricJure/Primerjalnik_Cen/blob/master/praktikum2.2/img/slika_freenom.png)<br>
 Link: https://www.freenom.com/en/index.html?lang=en
 
 # Delo na projektu
