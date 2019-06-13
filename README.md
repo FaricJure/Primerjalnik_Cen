@@ -25,3 +25,8 @@ Uporabili smo tudi google maps API, ki se uporablja, ko klikneš na sliko od trg
 Link: https://cloud.google.com/maps-platform/<br>
 ![alt text](https://github.com/FaricJure/Primerjalnik_Cen/blob/master/praktikum2.2/img/chocolate.jpg)
 @github/support
+# Avtorji
+Jure Farič <jure.faric@gmail.com><br>
+Nikolaj Gradišnik <email> <br>
+Eftimije Tomovski <email> <br>
+Bojana Markova <email>
