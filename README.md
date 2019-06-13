@@ -8,22 +8,39 @@ Naša spletna aplikacija deluje na računalniku pravtako pa tudi na mobilni apli
 # Inštalacija
 Pritisk na gumb clone or download. Downloadate v obliki .zip dokumenta. Zatem unzipate pa dodate v htdocs folder v XAMPP mapi(ali na podoben način na drugih aplikacijah). Start apache na XAMPP -> pritisk na gumb admin -> izbereš index.php zatem pa slediš navodilam iz <b>Uporaba aplikacije</b>.
 # Uporaba aplikacije
-Začetna stran je index.php kjer je opcija za prijavo in registracijo. Po registraciji/prijavi pa je na voljo dodajanje izdelkov in pregled vseh izdelkov. Pri vnašanju izdelkov je potrebno vnesti barcode ali pa ga skeniraš z scannerjem z pritiskom na gumb "scan". Za primerjavo pa gremo na podrobnost izdelka in če je isti izdelek dodan v drugi trgovini se prikažejo opcije za primerjavo cen iz drugih trgovin.
-
-
+Začetna stran je index.php kjer je opcija za prijavo in registracijo. Po registraciji/prijavi pa je na voljo dodajanje izdelkov in pregled vseh izdelkov. Pri vnašanju izdelkov je potrebno vnesti barcode ali pa ga skeniraš z scannerjem z pritiskom na gumb "scan". Za primerjavo pa gremo na podrobnost izdelka in če je isti izdelek dodan v drugi trgovini se prikažejo opcije za primerjavo cen iz drugih trgovin.<br>
+![alt text](https://github.com/FaricJure/Primerjalnik_Cen/blob/master/praktikum2.2/img/chocolate.jpg)<br>
+slika 1: Homepage.<br>
+Lahko pa se samo povežete na našo domeno preko naslednje povezave (če je host online):<br>
+https://www.cena3.tk
 
 # API-i, ki smo jih uporabili
 Pri razvijanju projekta smo uporabili že narejen Barcode reader od podjetja <b>dynamsoft</b>.<br>
 Link: https://www.dynamsoft.com/
 <br>
+![alt text](https://github.com/FaricJure/Primerjalnik_Cen/blob/master/praktikum2.2/img/chocolate.jpg)<br>
+slika 2: Uporaba dynamsofttovega javascripta.<br>
 Uporabili smo tudi api, ki ti najde public ipv4 od podjetja <b>ipify</b>.
 <br>
 Link: https://www.ipify.org/
 <br>
+![alt text](https://github.com/FaricJure/Primerjalnik_Cen/blob/master/praktikum2.2/img/chocolate.jpg)<br>
 Uporabili smo tudi google maps API, ki se uporablja, ko klikneš na sliko od trgovine, da ti prikaže vse najbližje trgovine od izbrane trgovine.
 <br>
 Link: https://cloud.google.com/maps-platform/<br>
-![alt text](https://github.com/FaricJure/Primerjalnik_Cen/blob/master/praktikum2.2/img/chocolate.jpg)
+![alt text](https://github.com/FaricJure/Primerjalnik_Cen/blob/master/praktikum2.2/img/chocolate.jpg)<br>
+slika 3: uporaba google maps api za prikaz najbližjih trgovin.<br>
+Uporabili smo tudi freenom, na katerem smo naredili zastonj domeno na katero se lahko uporabniki povežejo brez, da bi si morali inštalirat naš projekt, kar naredi našo spletno aplikacijo še dodatno enostavno za uporabljat.<br>
+![alt text](https://github.com/FaricJure/Primerjalnik_Cen/blob/master/praktikum2.2/img/chocolate.jpg)<br>
+Link: https://www.freenom.com/en/index.html?lang=en
+
+# Delo na projektu
+Pri izdelovanju spletne aplikacije smo uporabili agilno metodo kanban. Ko je posameznik z določenim "taskom" končal je naredil drugega in začel delat na njem. S tem smo lahko naredili čim več stvari brez, da bi zapravljali čas.<br>
+Večinoma smo pa delali po parih, še posebej, ko smo odpravljali težave v kodi (extremno programiranje).<br>
+Enostavne funkcionalnosti pa je ponavadi vsak naredil sam (prijava, bannanje/disablanje uporabnikov, podatkovna baza za določen problem,...).<br>
+Eftimije : Bojana<br>
+Jure : Nikolaj<br>
+Za komuniciranje smo pa uporabljali Facebook ter Discord.
 
 # Avtorji
 Jure Farič, <jure.faric@student.um.si><br>
