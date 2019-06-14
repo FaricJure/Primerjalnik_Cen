@@ -20,6 +20,7 @@ if (isset($_GET['pid'])) {
         $addInWishlist = $conn->prepare("INSERT INTO wishlist(product_id,user_id,date) VALUES(?,?,?)");
         $addInWishlist->execute([$pid, $uid, $time]);
 
+
        header("Location:wishlist.php");
 
     } else {
@@ -49,8 +50,8 @@ if(isset($_SESSION['id'])){
                where wishlist.user_id='$uid'";
 
     $products = $conn->query($wishlist)->fetchAll();
-
-
+    $addAlert=$conn->prepare("UPDATE `user` SET `alert` = '0' WHERE `user`.`id` =  $uid");
+    $addAlert->execute();
 
 
 }
@@ -72,7 +73,9 @@ if(isset($_SESSION['id'])){
                                 <div class="products-slick" data-nav="#slick-nav-1">
                                     <!-- products -->
                                     <?php foreach ($products as $product): ?>
-                                        <?php include 'product_item.php' ?>
+                                        <?php
+                                        include 'product_item.php';
+                                        ?>
                                     <?php endforeach; ?>
                                     <!-- /products -->
                                 </div>

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: eftimije
- * Date: 13.6.2019
- * Time: 00:09
- */
 
 
 include  "header.php";

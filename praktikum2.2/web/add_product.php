@@ -2,6 +2,8 @@
 include "header.php";
 require "dbh.inc.php";
 
+//echo "<img src='showimage.php?id=40'>";
+
 $storesQuery = "SELECT * FROM store";
 $stores = $conn->query($storesQuery)->fetchAll();
 
@@ -14,37 +16,19 @@ if (isset($_POST['product-submit'])) {
     $categoryId = $_POST['category'];
     $price = $_POST['price'];
     $barcode = $_POST['barcode'];
-    $image = $_POST['image'];
+    $image = $_FILES['image']['name'];
     $storeId = $_POST['store'];
     $description = $_POST['description'];
+    $image2 =file_get_contents($_FILES['image']['tmp_name']);//podatki o sliki
     $subcategory = 1;
+    $uid=$_SESSION['id'];
 
-    $productQuery = "Select product.id as pid , product.name as productName, store.name as storeName,store.id as storeId from product
-    join product_store on product.id=product_store.product_id 
-    join store on store.id=product_store.store_id
-    where product.name='" . $productName . "' and store.id='" . $storeId . "'";
-    $products = $conn->query($productQuery)->fetchAll();
+    $insertProduct = $conn->prepare("INSERT INTO product(name,price,barcode,image_url,category_id,description,subcategory_id,user_id,update_time,img) VALUES (?,?,?,?,?,?,?,?,?,?)");
+    $insertProduct->execute([$productName, $price, $barcode, $image, $categoryId, $description, $subcategory,$uid,'CURRENT_TIMESTAMP',$image2]);
+    $productId = $conn->lastInsertId();
 
-    foreach ($products as $product) {
-        if (($product['productName'] == $productName) && ($product['storeId'] == $storeId)) {
-
-            $URL="product_update.php?id=".$product['pid'];
-            echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
-            echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
-
-            break;
-
-        } else {
-
-            $insertProduct = $conn->prepare("INSERT INTO product(name,price,barcode,image_url,category_id,description,subcategory_id,user_id) VALUES (?,?,?,?,?,?,?,?)");
-            $insertProduct->execute([$productName, $price, $barcode, $image, $categoryId, $description, $subcategory, $uid]);
-            $productId = $conn->lastInsertId();
-
-            $insertStore = $conn->prepare("INSERT INTO  product_store(product_id,store_id) VALUES(?,?)");
-            $insertStore->execute([$productId, $storeId]);
-
-        }
-    }
+    $insertStore = $conn->prepare("INSERT INTO  product_store(product_id,store_id) VALUES(?,?)");
+    $insertStore->execute([$productId, $storeId]);
 }
 ?>
 <div class="container">
@@ -53,7 +37,7 @@ if (isset($_POST['product-submit'])) {
         <div class="section-title">
             <h3 class="title">Add Product</h3>
         </div>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <input class="input" type="text" name="name" placeholder="Name" required>
             </div>
@@ -95,7 +79,7 @@ if (isset($_POST['product-submit'])) {
                 } ?>" placeholder="Barcode" required>
             </div>
             <textarea id="subject" name="description" placeholder="Description"
-                      style="height:200px;width:100%" required></textarea>
+                      style="height:200px;width:100%" ></textarea>
             <br><br>
             <input class="input" type="file" name="image" placeholder="Image URL" required>
             <br>

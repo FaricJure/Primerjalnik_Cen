@@ -39,7 +39,7 @@ if (isset($_POST['signup-submit'])) {
                 header("Location: signup.php?error-usertaken&mail=" . $email);
                 exit();
             } else {
-                $sql = "INSERT INTO user (uid, pwd, email) VALUES (?, ?, ?)";
+                $sql = "INSERT INTO user (uid, pwd, email,active) VALUES (?, ?, ?,1)";
                 $stmt = $conn->prepare($sql);
                 if (!$stmt) {
                     header("Location: signup.php?error-createuser");

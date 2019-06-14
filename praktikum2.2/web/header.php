@@ -37,6 +37,13 @@ if(isset($_SESSION['id'])) {
     $uid = $_SESSION['id'];
     $wishlist = "SELECT * FROM wishlist WHERE user_id='$uid'";
     $countProducts = $conn->query($wishlist)->rowCount();
+    $novoObvestilo="SELECT alert FROM `user` WHERE `id`=$uid ";
+    $novoObvestilo2=$conn->query($novoObvestilo)->fetchAll();
+    $a="";
+    foreach ($novoObvestilo2 as $nekaj):
+        if($nekaj["alert"]>0)
+        $a="Products have been updated";
+    endforeach;
 }
 ?>
 
@@ -93,10 +100,17 @@ if(isset($_SESSION['id'])) {
 
             <ul class="header-links pull-right">
                 <?php if(isset($_SESSION['id'])){?>
+                    <?php
 
 
+                    $uporabnik= $_SESSION['uid'];
+
+
+                    ?>
                     <li class="nav-item">
                         <form action="logout.inc.php" method="post">
+
+                    <li><a type="submit" href="#" name="submit"><i class="fa fa-user-o"></i><?=$uporabnik ?></li>
                     <li><a type="submit" href="logout.inc.php" name="logout-submit"><i class="fa fa-sign-out"></i>Logout</a></li>
                     </form>
                     </li>
@@ -120,8 +134,8 @@ if(isset($_SESSION['id'])) {
                 <div class="col-md-3">
 
                     <div class="header-logo">
-                        <a href="#" class="logo">
-                            <img src="img/slika.png" alt="">
+                        <a href="index.php" class="logo">
+                            <img src="img/slika.png" alt="" >
                         </a>
                     </div>
                 </div>
@@ -156,6 +170,7 @@ if(isset($_SESSION['id'])) {
                                     <i class="fa fa-heart-o"></i>
                                     <span>Your Wishlist</span>
                                     <div class="qty"><?= $countProducts?></div>
+                                    <div><?=$a ?></div>
                                 </a>
                             <?php } ?>
                         </div>
@@ -201,7 +216,7 @@ if(isset($_SESSION['id'])) {
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
                 <li class="active"><a href="index.php">Home</a></li>
-                <li><a href="#">Categories</a></li>
+
 
 
             </ul>

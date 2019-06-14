@@ -1,33 +1,36 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>NEKAJ (WebAssembly)</title>
+    <title>NEKAJ2 (WebAssembly)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" href="img/favicon.ico" />
-    <link rel="stylesheet" type="text/css" media="screen" href="./css/style_fresh.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/style_fresh2.css">
 </head>
 
 <body>
 
+<?php
 
-<div class="header">
-    <a href="https://www.dynamsoft.com" target="_blank" class="h-dynamsoft-logo"><img src="img/logo-dynamsoft-blackBg-190x47.png"></a
-    ><div class="header-divide"></div
-    ><a href="https://www.dynamsoft.com/Products/Dynamic-Barcode-Reader.aspx" target="_blank" class="dbr-logo-link"><img src="img/logo-dbr-88x88.png"></a>
-    <div class="h-center">
-        <a href="https://www.dynamsoft.com/CustomerPortal/LoginOrRegister.aspx?op=4DD608F3803493E4&product=8BC841D35BACD076" class="h-sign-in-mobile" target="_blank">
-            <img src="./img/icon-login.png">
-        </a>
-    </div>
-</div>
+require 'header.php';
+
+$productQuery = "Select product.id as productId,product.name as productName ,store.name as sotreName,product.price as price ,product.image_url as image 
+    from product 
+    join product_store on product.id=product_store.product_id 
+    join store on store.id=product_store.store_id
+    group by product.name";
+$products = $conn->query($productQuery)->fetchAll();
+?>
+
+
 
 <!-- content -->
-<div class="content">
+<div class="content" >
     <!-- picker -->
-    <div class="picker" id="Picker">
+    <div class="picker" id="Picker" style="margin: 0px;">
+
         <div class="p-frame">
             <video class="dbrScanner-video" id="PVideo" playsinline="true" muted="muted"></video>
         </div>
@@ -41,9 +44,7 @@
             </div>
             <!-- scanning resluts  -->
             <div id="resultContainer" class="result-container" ></div>
-            <?php
-            header("www.google.com");
-            ?>
+
         </div>
     </div>
     <!-- waiting ui-->
@@ -126,7 +127,7 @@
     <label class="m-region" for="MRegion"></label>
 
     <!-- left bar -->
-    <div class="leftbar">
+    <div class="leftbar" style="margin: 1px;">
         <input type="radio" autocomplete="off" name="lItem" value="itemSource" id="LSource">
         <label class="l-item" for="LSource">Video Source</label>
         <input type="radio" autocomplete="off" name="lItem" value="itemResolution" id="LResolution">
@@ -329,14 +330,14 @@
                 <a href="https://www.dynamsoft.com/Company/Contact.aspx" target="_blank">Contact Us</a>
             </div>
         </div>
-    </div>
+    </div >
 </div>
 
 <!-- footer -->
 <div class="footer">
     <div class="f-center">
         <a href="https://www.dynamsoft.com" target="_blank" class="f-dynamsoft-logo">
-            <img src="img/logo-dynamsoft-blackBg-190x47.png"></a>
+
         <div class="f-divide"></div>
         <div class="f-text">© 2003–2019 Dynamsoft. All rights reserved.
             <a href="https://www.dynamsoft.com/PrivacyStatement.aspx" target="_blank">Privacy Statement </a
@@ -383,7 +384,7 @@
 <script src="https://demo.dynamsoft.com/dbr_wasm/js/dbr-6.5.1.min.js?v=20190425"></script>
 <?php
 $ip = file_get_contents('http://api.ipify.org');
-echo "My public IP address is: " . $ip;
+
 
 ?>
 <div id="a123" accesskey="<?php echo $ip ?>"></div>

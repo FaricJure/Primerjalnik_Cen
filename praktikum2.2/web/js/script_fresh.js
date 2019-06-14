@@ -1,5 +1,5 @@
-
-dbr.licenseKey = "t0126lQMAALOM4IsRTqjlI2vo9kWXT74dYx6WXRxvc3PjoH+GnGhyTQ0m5T3XO9rmaXYp/eNz5nJSDCf6Zsp8Mk6HIzZqdFEa7azdRTAwMzAzMDMwMzArMCswKzArMCswOzA7MDswOzD3u66f6M1B474Z6Bp9q/9m1hSX6gNIqrD4=";
+dbr.licenseKey="t0127lQMAAAoDDCEqIdQp9V62QVFhTYBPDXgJcuLpL07UzmtcmzT4soiLQw1dGHX1Ae18ukbC5OhNMBDJYAZV5FnlGUIKYYh903Bn7a1AGOYwzGGYwzCHYaZhpmGmYaZhpmGWYZZhlmGWYe5vrZ/ozUajvpnoGt7Vf5NgsipP4Xe13g=="
+//dbr.licenseKey = "t0126lQMAALOM4IsRTqjlI2vo9kWXT74dYx6WXRxvc3PjoH+GnGhyTQ0m5T3XO9rmaXYp/eNz5nJSDCf6Zsp8Mk6HIzZqdFEa7azdRTAwMzAzMDMwMzArMCswKzArMCswOzA7MDswOzD3u66f6M1B474Z6Bp9q/9m1hSX6gNIqrD4=";
 //t0068MgAAAKkfxtAu2bV67/RLmEJMaFGzhi/pg4ZNxyQOGlsAY/O+xULRG11Gt5a7f7xJpnrxcH6t9+Z1Aj6UttMmU1HFmYI=
 src="https://api.ipify.org?format=json&callback=getIP";
 
@@ -12,7 +12,7 @@ var $ipv4= document.getElementById('a123');
 
 function myFunction(x) {
 
-    var naslov="https://"+$ipv4.accessKey+"/Primerjalnik_Cen/praktikum2.2/web/add_product.php?koda="+x;
+    var naslov="https://"+"www.cena3.tk"+"/Primerjalnik_Cen-master4/praktikum2.2/web/add_product.php?koda="+x;
 
     location.replace(naslov);
 }

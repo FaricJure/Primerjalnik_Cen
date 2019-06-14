@@ -24,6 +24,10 @@ if (isset($_POST['login-submit'])) {
                     $_SESSION['id'] = $row['id'];
                     $_SESSION['uid'] = $row['uid'];
                     $_SESSION['isadmin'] = $row['admin'];
+                    $_SESSION['active']=$row['active'];
+                    if($row['active']==0){
+                        session_destroy();
+                    }
 
                     # 1 hour
                     setcookie("ip_addr", $_SERVER['REMOTE_ADDR'], time()+3600);

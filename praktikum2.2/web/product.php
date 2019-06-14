@@ -19,12 +19,14 @@ if (isset($_GET['id'])) {
     $product = $productQuery->fetch();
     $storeName = $_GET['store'];
     $productName = $_GET['name'];
+    $a="select min(price) as 'pri' from product where name='$productName' ";
+    $b="select max(price) as 'pri2' from product where name='$productName' ";
 
     // Get product visits from database, and update.
     $visitsUpdated = $product['visits'] + 1;
     $conn->query("UPDATE product SET visits = '$visitsUpdated' WHERE id = '$productId'")->execute();
 
-    $otherStores = $conn->query("Select store.name as storeName ,product.price as productPrice, product.id as productId from store 
+    $otherStores = $conn->query("Select store.name as storeName ,product.price as productPrice, product.id as productId , store.img_url as slika from store 
      join product_store on store.id=product_store.store_id 
      join product on product_store.product_id=product.id where product.name='" . $productName . "' ");
 
@@ -38,6 +40,24 @@ if (isset($_GET['id'])) {
         $stores++;
     }
 }
+$result=$conn->query($a);
+$result->execute();
+$vrednosti=array();
+
+foreach ($result as $nekaj):
+    array_push($vrednosti,$nekaj['pri']);
+endforeach;
+
+$d=$conn->query($b);
+$d->execute();
+foreach ($d as $nekaj):
+    array_push($vrednosti,$nekaj['pri2']);
+endforeach;
+
+$vrednosti[2]=$vrednosti[1]-$vrednosti[0];
+$vrednosti[3]=($vrednosti[2]/$vrednosti[1])*100;
+//print_r($vrednosti);
+
 
 
 if (isset($_POST['delete'])) {
@@ -54,6 +74,9 @@ include "header.php";
     <!-- SECTION -->
     <div class="section">
     <!-- container -->
+
+
+
     <div class="container">
     <!-- row -->
     <div class="row">
@@ -61,7 +84,9 @@ include "header.php";
     <div class="col-md-5">
         <div id="product-main-img">
             <div class="product-preview">
-                <img src="<?php echo('img/' . trim($product['image_url'])) ?>" alt="">
+                <?php $id=$product['id']; ?>
+                <img src="<?php echo "showimage.php?id=$id";    $product['id'];?>" alt="">
+
             </div>
         </div>
     </div>
@@ -90,61 +115,79 @@ include "header.php";
                 </div>
             </div>
             <?php } ?>
-<!--            <div>-->
-<!--                <div class="product-rating">-->
-<!--                    <i class="fa fa-star"></i>-->
-<!--                    <i class="fa fa-star"></i>-->
-<!--                    <i class="fa fa-star"></i>-->
-<!--                    <i class="fa fa-star"></i>-->
-<!--                    <i class="fa fa-star-o"></i>-->
-<!--                </div>-->
-<!--                <a class="review-link" href="#"></a>-->
-<!--            </div>-->
+
             <div>
-                <h3 class="product-price"><?php echo $product['price'] ?><i class="fa fa-euro"></i></h3>
+                <h3 class="product-price">Price differential: <?php echo round($vrednosti[3],2)?> %</h3>
 <!--                <span class="product-available">In Stock</span>-->
             </div>
 
             <ul class="product-btns">
-                <li><a href="wishlist.php?pid=<?php echo $product['id']  ?>&uid=<?php echo $_SESSION['id']?>"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
+                <li><a href="wishlist.php?pid=<?php  ?>&uid=<?php echo $_SESSION['id']?>"><i class="fa fa-heart-o"></i> add to wishlist</a></li>
 
             </ul>
 
             <ul class="product-shops">
                 <?php
                 foreach ($stores as $store):
-                    if ($store->$storeName = 'Merkator') {
+
+                    if($store->$storeName='Merkator'){
+
                         ?>
-                        <li class="row">
-                            <div class="col-md-3">
-                                <img src="img/mercator.png">
-                            </div>
-                            <div class="col-md-7">
-                                <a href="map.php?store=<?php echo $store->storeName ?>"><?php echo $store->storeName ?></a>
-                            </div>
-                            <div class="col-md-2">
-                                <b class="product-price pull-right">
-                                    <i class="fa fa-euro"></i> <?php echo $store->productPrice ?>
-                                </b>
-                            </div>
+
+
+                        <li>
+
+                            <a href="map.php?store=<?php echo $store->storeName; ?>"><img src="<?php echo $store->slika ?>"><?php echo $store->storeName ?></a>
+                            <b class="product-price pull-right" style="margin-top: 35px"><i class="fa fa-euro"></i> <?php echo $store->productPrice ?></b>
                         </li>
                         <hr>
                         <?php
                         continue;
 
-                    } elseif ($store->storeName = 'Tus') {
+                    }
+                    elseif ($store->storeName='Tus'){
                         ?>
 
                         <li>
-                            <a href="#"><img src="img/tus.png"><?php echo $store->storeName ?></a>
-                            <b class="product-price pull-right"><i
-                                        class="fa fa-euro"></i> <?php echo $store->productPrice ?></b>
+                            <a href="href="map.php?store=<?php echo $store->storeName; ?>""><img src="<?php echo $store->slika ?>"><?php echo $store->storeName ?></a>
+                            <b class="product-price pull-right"><i class="fa fa-euro"></i> <?php echo $store->productPrice ?></b>
                         </li>
 
+
+
                         <?php
+
                         break;
                     }
-endforeach;
+                    elseif ($store->storeName='Hofer'){
+                        ?>
+
+                        <li>
+                            <a href="href="map.php?store=<?php echo $store->storeName; ?>""><img src="<?php echo $store->slika ?>"><?php echo $store->storeName ?></a>
+                            <b class="product-price pull-right"><i class="fa fa-euro"></i> <?php echo $store->productPrice ?></b>
+                        </li>
+
+
+
+                        <?php
+
+                        break;
+                    }
+                    elseif ($store->storeName='Spar'){
+                        ?>
+
+                        <li>
+                            <a href="href="map.php?store=<?php echo $store->storeName; ?>""><img src="<?php echo $store->slika ?>"><?php echo $store->storeName ?></a>
+                            <b class="product-price pull-right"><i class="fa fa-euro"></i> <?php echo $store->productPrice ?></b>
+                        </li>
+
+
+
+                        <?php
+
+                        break;
+                    }
+                endforeach;
                 ?>
 
             </ul>
@@ -163,7 +206,7 @@ endforeach;
             <!-- product tab nav -->
             <ul class="tab-nav">
                 <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
-                <li><a data-toggle="tab" href="#tab2">Category</a></li>
+
                 <li><a data-toggle="tab" href="#tab3"></a></li>
             </ul>
             <!-- /product tab nav -->
@@ -182,22 +225,7 @@ endforeach;
                 <!-- /tab1  -->
 
                 <!-- tab2  -->
-                <div id="tab2" class="tab-pane fade in">
-                    <div class="row">
-                        <div class="col-sm-6 container text-center">
-                            <table class="table">
-                                <tr>
-                                    <td>RAM</td>
-                                    <td>16GB</td>
-                                </tr>
-                                <tr>
-                                    <td>RAM</td>
-                                    <td>16GB</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+
                 <!-- /tab2  -->
 <!---->
 <!--                <!-- tab3  -->

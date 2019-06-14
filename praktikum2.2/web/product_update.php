@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: Bojana
- * Date: 05.6.2019
- * Time: 13:16
- */
+
 include "dbh.inc.php";
 $storesQuery = "SELECT * FROM store";
 $stores = $conn->query($storesQuery)->fetchAll();
@@ -16,7 +11,7 @@ if (isset($_GET['id'])) {
     $productId = $_GET['id'];
     $editQuery = $conn->query("Select * from product where id='$productId'");
     $product = $editQuery->fetch();
-    print_r($product);
+    //print_r($product);
 }
 if (isset($_POST['edit'])) {
     $productId = $_POST['id'];
@@ -26,9 +21,19 @@ if (isset($_POST['edit'])) {
     $image = $_POST['image'];
     $storeId = $_POST['store'];
     $description = $_POST['description'];
-    $query = $conn->query("Update product SET name = '$productName', category_id = '$categoryId', price = '$price', image_url = '$image',description = '$description' where  id = '$productId'");
-    print_r ($query);
+    $query = $conn->query("Update product SET name = '$productName', category_id = '$categoryId', price = '$price', image_url = '$image',description = '$description',update_time=CURRENT_TIMESTAMP where  id = '$productId'");
+    //print_r ($query);
     $query->execute();
+
+    $izberiUporabnike="SELECT `user_id` FROM `wishlist` WHERE `product_id`=$productId";
+    $izberiUporabnike2=$conn->query($izberiUporabnike)->fetchAll();
+    foreach ($izberiUporabnike2 as $uporabnik):
+        $u=$uporabnik["user_id"];
+        $addAlert=$conn->prepare("UPDATE `user` SET `alert` = '1' WHERE `user`.`id` =  $u");
+        $addAlert->execute();
+    endforeach;
+
+
     header("Location:index.php");
     exit();
 }
@@ -83,7 +88,7 @@ include "header.php";
                 <textarea id="subject" name="description" placeholder="Description" value="<?php echo $product['description'] ?>"
                           style="height:200px;width:100%"></textarea>
                 <br><br>
-                <input class="input" type="file" name="image" placeholder="Image URL" value="<?php echo $product['image_url'] ?>">
+
                 <br>
                 <input type="hidden" name="id" value="<?php echo $productId ?>" />
                 <input class="primary-btn cta-btn" type="submit" name="edit">
