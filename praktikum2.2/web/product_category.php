@@ -13,7 +13,7 @@ include "header.php";
 $selected=$_GET['selected'];
 
 
-$productQuery = "Select product.id as productId,product.name as productName ,store.name as sotreName,product.price as price ,product.image_url as image 
+$productQuery = "Select product.id as productId,product.name as productName ,store.name as storeName,product.price as price ,product.image_url as image 
     from product 
     join product_store on product.id=product_store.product_id 
     join store on store.id=product_store.store_id 
