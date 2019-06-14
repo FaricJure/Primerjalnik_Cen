@@ -9,7 +9,7 @@ Naša spletna aplikacija deluje na računalniku pravtako pa tudi na mobilni apli
 Pritisk na gumb clone or download. Downloadate v obliki .zip dokumenta. Zatem unzipate pa dodate v htdocs folder v XAMPP mapi(ali na podoben način na drugih aplikacijah). Start apache na XAMPP -> pritisk na gumb admin -> izbereš index.php zatem pa slediš navodilam iz <b>Uporaba aplikacije</b>.
 # Uporaba aplikacije
 Začetna stran je index.php kjer je opcija za prijavo in registracijo. Po registraciji/prijavi pa je na voljo dodajanje izdelkov in pregled vseh izdelkov. Pri vnašanju izdelkov je potrebno vnesti barcode ali pa ga skeniraš z scannerjem z pritiskom na gumb "scan". Za primerjavo pa gremo na podrobnost izdelka in če je isti izdelek dodan v drugi trgovini se prikažejo opcije za primerjavo cen iz drugih trgovin.<br>
-![alt text](https://github.com/FaricJure/Primerjalnik_Cen/blob/master/praktikum2.2/img/chocolate.jpg)<br>
+![alt text](https://github.com/FaricJure/Primerjalnik_Cen/blob/master/praktikum2.2/img/slika_homepage.png)<br>
 slika 1: Homepage.<br>
 Lahko pa se samo povežete na našo domeno preko naslednje povezave (če je host online):<br>
 https://www.cena3.tk
@@ -34,8 +34,10 @@ Link: https://cloud.google.com/maps-platform/<br>
 slika 4: Uporaba google maps api za prikaz najbližjih trgovin.<br>
 <br>
 Uporabili smo tudi <b>freenom</b>, na katerem smo naredili zastonj domeno na katero se lahko uporabniki povežejo brez, da bi si morali inštalirat naš projekt, kar naredi našo spletno aplikacijo še dodatno enostavno za uporabljat.<br>
+Link: https://www.freenom.com/en/index.html?lang=en<br>
 ![alt text](https://github.com/FaricJure/Primerjalnik_Cen/blob/master/praktikum2.2/img/slika_freenom.png)<br>
-Link: https://www.freenom.com/en/index.html?lang=en
+slika 5: Uporaba freenom
+
 
 # Delo na projektu
 Pri izdelovanju spletne aplikacije smo uporabili agilno metodo kanban. Ko je posameznik z določenim "taskom" končal je naredil drugega in začel delat na njem. S tem smo lahko naredili čim več stvari brez, da bi zapravljali čas.<br>
